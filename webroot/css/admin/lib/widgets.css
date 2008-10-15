@@ -1,0 +1,166 @@
+@charset "utf-8";
+/* Widgets
+Domain:				artillery.ch/bachelorapp
+Start:				080421_BW
+Last update:	080421_BW
+Author:				BW
+Author URL:		artillery.ch
+*/
+/* Navigation
+/////////////////////////////////////////////////////////////////*/
+#nav ul li a	{
+	font-weight: normal;
+	text-transform: uppercase;
+	display: block;
+	padding: 5px 0 2px 10px;
+	width: 109px;
+	background-image: url('../img/nav_li.png');
+	background-position: 0 25px;
+}
+#nav ul li a:hover	{ color: #fff; background-position: 0 0;}
+
+#nav.Institutes ul li a#Institutes				{ color: #fff; background-position: 0 0;}
+#nav.Institute ul li a#Institutes					{ color: #fff; background-position: 0 0;}
+#nav.Buildings ul li a#Buildings					{ color: #fff; background-position: 0 0;}
+#nav.Building ul li a#Buildings						{ color: #fff; background-position: 0 0;}
+#nav.Records ul li a#Records							{ color: #fff; background-position: 0 0;}
+#nav.Record ul li a#Records								{ color: #fff; background-position: 0 0;}
+#nav.Atomics ul li a#Atomics							{ color: #fff; background-position: 0 0;}
+#nav.Atomic ul li a#Atomics								{ color: #fff; background-position: 0 0;}
+#nav.Biologicals ul li a#Biologicals			{ color: #fff; background-position: 0 0;}
+#nav.Biological ul li a#Biologicals				{ color: #fff; background-position: 0 0;}
+#nav.Chemicals ul li a#Chemicals					{ color: #fff; background-position: 0 0;}
+#nav.Chemical ul li a#Chemicals						{ color: #fff; background-position: 0 0;}
+#nav.Classes.Chemical ul li a#Chemicals		{ color: #333; background-position: 0 25px;}
+#nav.Phrases.Chemical ul li a#Chemicals		{ color: #333; background-position: 0 25px;}
+#nav.Classes ul li a#ChemicalClasses			{ color: #fff; background-position: 0 0;}
+#nav.Class ul li a#ChemicalClasses				{ color: #fff; background-position: 0 0;}
+#nav.Phrases ul li a#ChemicalPhrases			{ color: #fff; background-position: 0 0;}
+#nav.Phrase ul li a#ChemicalPhrases				{ color: #fff; background-position: 0 0;}
+
+#nav ul li a.subnav	{ margin-left: 10px; width: 99px; background-image: url('../img/subnav_li.png');}
+
+/* Buttons
+/////////////////////////////////////////////////////////////////*/
+a.back	{background-image: url('../img/back_bg.png')}
+a.edit	{background-image: url('../img/action_bg.png')}
+a.add		{background-image: url('../img/action_bg.png')}
+a.btn		{background-image: url('../img/action_bg.png')}
+
+a.back, a.edit, a.add, a.btn{
+	color: #fff;
+	text-align: center;
+	padding: 1px 2px 0;
+	display: block; width: 88px; height: 20px;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+}
+a.back{ color:#666;}
+a.back:hover, a.edit:hover, a.add:hover, a.btn:hover{ color: #333;}
+a.back:active, a.edit:active, a.add:active, a.btn:active{
+	background-position: 0 -29px;
+}
+/* Icon Links
+/////////////////////////////////////////////////////////////////*/
+a.view_records{background: url('../img/report.png') left center no-repeat;}
+a.edit_item		{background: url('../img/pencil.png') left center no-repeat;}
+a.delete_item	{background: url('../img/cross.png') left center no-repeat;}
+
+a.view_records, a.delete_item, a.edit_item{
+	padding-left: 20px;
+}
+/* Close Link
+/////////////////////////////////////////////////////////////////*/
+a.close{
+	display: block;
+	width: 14px;
+	height: 14px;
+	text-indent: -9999px;
+	overflow: hidden;
+	background-image: url('../img/close_dark.png');
+	background-position: top left;
+}
+a:hover.close{
+	background-position: bottom left;
+}
+/* Extend / Reduce Link
+/////////////////////////////////////////////////////////////////*/
+a#con_secondary, a#ex_secondary{
+	padding-right: 20px;
+	font-weight: normal;
+}
+a:hover#con_secondary, a:hover#ex_secondary{ color: #333;}
+a#ex_secondary{background: url('../img/arrow.png') 0 1px no-repeat;}
+a#con_secondary{background: url('../img/arrow.png') 0 -9px no-repeat;}
+a#con_secondary, a#ex_secondary{
+	padding-left: 13px;
+}
+/* Shortcuts
+/////////////////////////////////////////////////////////////////*/
+p#shortcuts { }
+p#shortcuts a	{float: left; margin-right: 10px;}
+/* Dates
+/////////////////////////////////////////////////////////////////*/
+#content p.dates {
+	padding: 4px 0 0;
+	background: #eee;
+	border: 1px solid #ddd;
+}
+p.dates span { margin: 0 10px 0 20px; color: #999;}
+/* Counter
+/////////////////////////////////////////////////////////////////*/
+h2 span.count{ font-weight: normal; padding-left: 20px; font-size: 12px;}
+/* Pagination
+/////////////////////////////////////////////////////////////////*/
+#page_nav.pagination div					{ display: inline;}
+#page_nav.pagination							{ text-align: center; position: relative;}
+#page_nav.pagination a.prev,
+#page_nav.pagination div.prev			{ position: absolute; top: 7px; left: 10px; float: left;}
+#page_nav.pagination a.next,
+#page_nav.pagination div.next			{ position: absolute; top: 7px; right: 10px;}
+#page_nav.pagination strong span	{ }
+#page_nav.pagination strong				{ font-weight: normal;}
+#page_nav.pagination div.disabled	{ color: #999;}
+#page_nav.pagination span.current	{ color: #F03;}
+/* Messages
+/////////////////////////////////////////////////////////////////*/
+.message{
+	padding: 5px 0;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	background: #00DCD6;
+	border-radius: 6px;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+/* Hints
+/////////////////////////////////////////////////////////////////*/
+.hint				{
+	position: relative;
+	float: right;
+	padding: 10px;
+	margin: 1.5em 0.5em 0.5em 0px;
+	width: 300px;
+	background: #FEFDCF;
+	border-radius: 6px;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+.hint a.close{
+	position: absolute;
+	top: 6px;
+	right: 6px;
+}
+/* Clearfix
+/////////////////////////////////////////////////////////////////*/
+.clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;height: 0;}
+.clearfix { display: inline-block;}
+html[xmlns] .clearfix { display: block;}
+* html .clearfix { height: 1%;}

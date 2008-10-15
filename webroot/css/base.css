@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* Admin
+Domain:				ideabucket.com
+Start:				081015_BW
+Last update:	081015_BW
+Author:				BW
+Author URL:		artillery.ch
+   
+* Screen & Projection Styles *
+/////////////////////////////////////////////////////////////////*/
+@import "admin/lib/reset.css";
+@import "admin/lib/forms.css";
+@import "admin/lib/layout.css";
+@import "admin/lib/typography.css";
+@import "admin/lib/widgets.css";
+@import "lib/jquery-ui-themeroller.smoothness.css";
+@import "lib/jquery-ui-slider-additions.css";
