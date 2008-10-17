@@ -1,5 +1,5 @@
 <h2>Edit Idea</h2>
-	<?php echo $form->create('Idea');?>
+	<?php echo $form->create('Idea', array('enctype'=>"multipart/form-data"));?>
 	<?php echo $form->hidden('id'); ?>
 <ul>
 	<li>
@@ -7,34 +7,37 @@
 		<?php echo $form->error('title', 'Title is required.'); ?>
 	</li>
 	<li>
-		<?php echo $form->input('User', array())?>
+		<?php echo $form->input('User', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('image', array())?>
+		<?php echo $form->input('image', array('type'=>'file')); ?>
 	</li>
 	<li>
-		<?php echo $form->input('excerpt', array())?>
+		<?php echo $form->input('excerpt', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('content', array())?>
+		<?php echo $form->input('content', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('people', array())?>
+		<?php echo $form->input('tags', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('weather', array())?>
+		<?php echo $form->input('people', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('costs', array())?>
+		<?php echo $form->input('weather', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('season', array())?>
+		<?php echo $form->input('costs', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('daytime', array())?>
+		<?php echo $form->input('season', array()); ?>
 	</li>
 	<li>
-		<?php echo $form->input('duration', array())?>
+		<?php echo $form->input('daytime', array()); ?>
+	</li>
+	<li>
+		<?php echo $form->input('duration', array()); ?>
 	</li>
 	<li class="hint">
 		<h3>Hint:</h3>
@@ -43,6 +46,6 @@
 	</li>
 </ul>
 <div id="page_nav">
-	<?php echo $form->end('Save')?>
+	<?php echo $form->end('Save'); ?>
 	<?php echo $html->link('Cancel', array('action'=>'index',),  array('class'=>'back')); ?>
 </div>

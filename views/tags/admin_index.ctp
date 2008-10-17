@@ -1,28 +1,24 @@
-<h2>Buildings <span class="count"><strong><?php echo $paginator->counter(array('format' => __('%count% ', true))); __('recorded')?></span></h2>
+<h2>Tags <span class="count"><strong><?php echo $paginator->counter(array('format' => __('%count% ', true))); __('recorded')?></span></h2>
 	<?php echo $html->link('Add', array('action'=>'add'), array('class'=>'edit')); ?>
 <table>
 	<tr>
 		<th><?php echo $paginator->sort('Id', 'id'); ?></th>
-		<th><?php echo $paginator->sort('Name', 'name'); ?></th>
-		<th><?php echo $paginator->sort('Adress', 'adress'); ?></th>
+		<th><?php echo $paginator->sort('Tag', 'tag'); ?></th>
 		<th>Edit</th>
 		<th>Delete</th>
 	</tr>
 
-	<?php foreach ($buildings as $building): ?>
+	<?php foreach ($tags as $tag): ?>
 	<tr>
-		<td><?php echo $building['Building']['id']; ?></td>
+		<td><?php echo $tag['Tag']['id']; ?></td>
 		<td>
-			<?php echo $html->link($building['Building']['name'], array('action'=>'view', $building['Building']['id']), array('title'=>'view this item'));?>
+			<?php echo $tag['Tag']['tag']; ?> 
 		</td>
 		<td>
-			<?php echo $building['Building']['street']." ".$building['Building']['number']; ?> 
+		<?php echo $html->link('Edit', array('action'=>'edit', $tag['Tag']['id']), array('class'=>'edit_item', 'title'=>'edit this item'));?>
 		</td>
 		<td>
-		<?php echo $html->link('Edit', array('action'=>'edit', $building['Building']['id']), array('class'=>'edit_item', 'title'=>'edit this item'));?>
-		</td>
-		<td>
-			<?php echo $html->link('Delete', array('action'=>'delete', $building['Building']['id']), array('class'=>'delete_item', 'title'=>'delete this item'), 'Are you sure?')?>
+			<?php echo $html->link('Delete', array('action'=>'delete', $tag['Tag']['id']), array('class'=>'delete_item', 'title'=>'delete this item'), 'Are you sure?')?>
 		</td>
 	</tr>
 	<?php endforeach; ?>

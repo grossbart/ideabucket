@@ -15,13 +15,12 @@
 	<!-- ——————————————————————————————————————————————————————————————————— CSS -->
 	<?php echo $html->css('base', 'stylesheet', array('media'=>'all')); ?>
 	<!-- ——————————————————————————————————————————————————————————————————— JS -->
-	<?php echo $javascript->link(array('jquery-1.2.6.min', 'accessibleUISlider.jQuery')) ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js" type="text/javascript"></script>
+	<?php echo $javascript->link(array('jquery-1.2.6.min', 'jquery.ui.all.min', 'accessibleUISlider.jQuery')); ?>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			if($('.message') != null){
 				setTimeout(function(){
-					$('.message').fadeOut('slow');
+					//$('.message').fadeOut('slow');
 				}, 4000)
 			};
 			$('select#IdeaPeople').accessibleUISlider({width: 310});

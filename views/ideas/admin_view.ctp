@@ -10,6 +10,7 @@
 	<dt>User</dt><dd><?php echo $idea['Idea']['user_id']; ?></dd>
 	<dt>Image</dt><dd><?php echo $idea['Idea']['image']; ?></dd>
 	<dt>Content</dt><dd><?php echo $idea['Idea']['content']; ?></dd>
+	<dt>Content</dt><dd><?php echo $idea['Idea']['tags']; ?></dd>
 	<dt>People</dt><dd><?php echo $idea['Idea']['people']; ?></dd>
 	<dt>Weather</dt><dd><?php echo $idea['Idea']['weather']; ?></dd>
 	<dt>Costs</dt><dd><?php echo $idea['Idea']['costs']; ?></dd>

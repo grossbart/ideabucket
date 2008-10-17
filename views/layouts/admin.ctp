@@ -17,7 +17,6 @@
 	<!-- ——————————————————————————————————————————————————————————————————— JS -->
 	<?php echo $javascript->link(array('jquery-1.2.6.min')) ?>
 	<script type="text/javascript">
-		<!--
 		$(document).ready(function(){
 			if($('.hint') != null){
 				$('.close').click(function(){
@@ -27,25 +26,22 @@
 			}
 			if($('.message') != null){
 				setTimeout(function(){
-					$('.message').fadeOut('slow');
+					//$('.message').fadeOut('slow');
 				}, 4000)
 			}
-			//if($('.extended') == null){
-				$('.secondary').hide();
-				$('#con_secondary').hide();
-				$('#ex_secondary').click(function(){
-					$('.secondary').fadeIn();
-					$(this).hide();
-					$('#con_secondary').show();
-				})
-				$('#con_secondary').click(function(){
-					$('.secondary').fadeOut();
-					$(this).hide();
-					$('#ex_secondary').show();
-				})
-			//}
+			$('.secondary').hide();
+			$('#con_secondary').hide();
+			$('#ex_secondary').click(function(){
+				$('.secondary').fadeIn();
+				$(this).hide();
+				$('#con_secondary').show();
+			})
+			$('#con_secondary').click(function(){
+				$('.secondary').fadeOut();
+				$(this).hide();
+				$('#ex_secondary').show();
+			})
 		})
-		//-->
 	</script>
 </head>
 	<!-- ——————————————————————————————————————————————————————————————————— BODY -->

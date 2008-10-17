@@ -1,5 +1,6 @@
 <?
 class AppController extends Controller{
+	var $helpers = array('Html', 'Form', 'Javascript' );
 	function beforeFilter(){
 		if(isset($this->params[Configure::read('Routing.admin')])) {
 			$this->layout = 'admin';

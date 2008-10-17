@@ -6,13 +6,17 @@
 			<?php echo $form->error('title', 'Title is required.'); ?>
 		</li>
 		<li>
-			<?php echo $form->input('Idea.image', array('type'=>'file'))?>
+			<?php echo $form->input('image', array('type'=>'file')); ?>
 		</li>
 		<li>
-			<?php echo $form->input('content', array())?>
+			<?php echo $form->input('content', array()); ?>
 		</li>
-		<li>
+		<li class="hidden">
 			<p><a href="#" title="Provide an excerpt" id="excerpt_link">Provide an excerpt</a> (max. 333 characters)</p>
+			<?php echo $form->input('excerpt', array()); ?>
+		</li>
+		<li>
+			<?php echo $form->input('tags', array()); ?>
 		</li>
 		<li>
 			<?php echo $form->input('people', array('type'=>'select', 'options'=>array(1=>'1',2=>'2',5=>'-5',10=>'-10',20=>'-20',50=>'-50', 100=>'>50')))?>
@@ -38,9 +42,10 @@
 	<?php echo $html->link('Cancel', array('action'=>'index',),  array('class'=>'back')); ?>
 </div>
 <script type="text/javascript" charset="utf-8">
+	$('.hidden > div').hide();
 	$('#excerpt_link').click(function(){
-		$(this).parent().after('<?php echo $form->input("excerpt", array("type"=>"textarea"))?>');
 		$(this).parent().hide();
+		$(this).parent().parent().children('div').show();
 		return false
 	});
 </script>

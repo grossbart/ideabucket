@@ -29,30 +29,33 @@ class ImageBehavior extends ModelBehavior {
 		foreach($settings['fields'] as $key=>$value) {
 			$field = ife(is_numeric($key), $value, $key);
 			$conf = ife(is_numeric($key), array(), ife(is_array($value),$value,array()));
-			//if (!is_array($field)) $field=array('name'=>$field);
 			$conf=Set::merge(
 			array (
-				//'name'=> '',
 				'thumbnail' => array('prefix'=>'thumb',
-					         'create'=>false,
-					         'width'=>'100',
- 					         'height'=>'100',
- 					         'aspect'=>true,
-							 'allow_enlarge'=>true,
-		                    ),
+					'create'=>false,
+					'width'=>'100',
+					'height'=>'100',
+					'aspect'=>true,
+					'allow_enlarge'=>true,
+					'crop'=>true
+					),
 				'resize'=>null, // array('width'=>'100','heigth'=>'100'),		
 				'versions' => array(
 				),
 			), $conf);
 			foreach ($conf['versions'] as $id=>$version) {
 				$conf['versions'][$id]=Set::merge(array(
- 					         'aspect'=>true,
-							 'allow_enlarge'=>false,
-		                    ),$version);				
+					'aspect'=>true,
+					'allow_enlarge'=>false,
+					'crop'=>false,
+					),
+					$version
+				);
 			}
 			if (is_array($conf['resize'])) {
 				if (!isset($conf['resize']['aspect'])) $conf['resize']['aspect']=true;
 				if (!isset($conf['resize']['allow_enlarge'])) $conf['resize']['allow_enlarge']=false;
+				if (!isset($conf['resize']['crop'])) $conf['resize']['crop']=false;
 			}
 			$fields[$field]=$conf;
 			
@@ -113,25 +116,22 @@ class ImageBehavior extends ModelBehavior {
 		}
 		
 		return true;
-	} 
-
+	}
 	
-	function afterFind(&$model, &$results, $primary) { 
+	function afterFind(&$model, &$results, $primary) {
 		extract($this->settings[$model->name]);
-
 		if ( is_array( $results ) ) {
 			$i=0;
 			if (isset($results[0])) {
-						while ( isset( $results[$i][$model->name] ) && is_array( $results[$i][$model->name] ) )  {
-				foreach ($fields as $field => $fieldParams) {
-					if (isset($results[$i][$model->name][$field]) && ($results[$i][$model->name][$field]!='')) {
-						$value=$results[$i][$model->name][$field];
-						$results[$i][$model->name][$field]=$this->__getParams(&$model, $field, $value,$fieldParams, $results[$i][$model->name]);
+				while ( isset( $results[$i][$model->name] ) && is_array( $results[$i][$model->name] ) )  {
+					foreach ($fields as $field => $fieldParams) {
+						if (isset($results[$i][$model->name][$field]) && ($results[$i][$model->name][$field]!='')) {
+							$value=$results[$i][$model->name][$field];
+							$results[$i][$model->name][$field]=$this->__getParams(&$model, $field, $value,$fieldParams, $results[$i][$model->name]);
+						}
 					}
+					$i++;
 				}
-                $i++;
-				
-				}             		
 			} else {
 				foreach ($fields as $field => $fieldParams) {
 					if (isset($results[$model->name][$field]) && ($results[$i][$model->name][$field]!='')) {
@@ -140,16 +140,16 @@ class ImageBehavior extends ModelBehavior {
 					}
 				}
 			}
-		}		
-		//debug($results);
-		return true;
-	} 	
+		}
+		return $results;
+	}
 	
 	function __getParams(&$model, $field, $value, $fieldParams, $record) {
 		extract($this->settings[$model->name]);
 		$result=array();
 		if ($value!='') {
-			$folderName = $this->__getFolder(&$model, $record);
+			$folderName = substr( $this->__getFolder($model, $record) , 1);
+			//$folderName = $this->__getFolder(&$model, $record);
 			$ext=$this->decodeContent($value);
 			$fileName=$field .'.'. $ext;
 			$result['path']=$folderName.$fileName;
@@ -188,7 +188,7 @@ class ImageBehavior extends ModelBehavior {
 			$folder = &new Folder($path = $folderPath, $create = false);
 			if ($folder!==false) {
 				@$folder->delete($folder->pwd());
-			}			
+			}
 		}
 		
 		@ignore_user_abort((bool) $this->runtime[$model->name]['ignoreUserAbort']);
@@ -206,50 +206,49 @@ class ImageBehavior extends ModelBehavior {
 	}
 	function decodeContent($content) {
 		$contentsMaping=array(
-	      "image/gif" => "gif",
-	      "image/jpeg" => "jpg",
-	      "image/pjpeg" => "jpg",
-	      "image/x-png" => "png",
-	      "image/jpg" => "jpg",
-	      "image/png" => "png",
-	      "application/x-shockwave-flash" => "swf",
-	      "application/pdf" => "pdf",
-	      "application/pgp-signature" => "sig",
-	      "application/futuresplash" => "spl",
-	      "application/msword" => "doc",
-	      "application/postscript" => "ps",
-	      "application/x-bittorrent" => "torrent",
-	      "application/x-dvi" => "dvi",
-	      "application/x-gzip" => "gz",
-	      "application/x-ns-proxy-autoconfig" => "pac",
-	      "application/x-shockwave-flash" => "swf",
-	      "application/x-tgz" => "tar.gz",
-	      "application/x-tar" => "tar",
-	      "application/zip" => "zip",
-	      "audio/mpeg" => "mp3",
-	      "audio/x-mpegurl" => "m3u",
-	      "audio/x-ms-wma" => "wma",
-	      "audio/x-ms-wax" => "wax",
-	      "audio/x-wav" => "wav",
-	      "image/x-xbitmap" => "xbm",             
-	      "image/x-xpixmap" => "xpm",             
-	      "image/x-xwindowdump" => "xwd",             
-	      "text/css" => "css",             
-	      "text/html" => "html",                          
-	      "text/javascript" => "js",
-	      "text/plain" => "txt",
-	      "text/xml" => "xml",
-	      "video/mpeg" => "mpeg",
-	      "video/quicktime" => "mov",
-	      "video/x-msvideo" => "avi",
-	      "video/x-ms-asf" => "asf",
-	      "video/x-ms-wmv" => "wmv"
-		);
+			"image/gif" => "gif",
+			"image/jpeg" => "jpg",
+			"image/pjpeg" => "jpg",
+			"image/x-png" => "png",
+			"image/jpg" => "jpg",
+			"image/png" => "png",
+			"application/x-shockwave-flash" => "swf",
+			"application/pdf" => "pdf",
+			"application/pgp-signature" => "sig",
+			"application/futuresplash" => "spl",
+			"application/msword" => "doc",
+			"application/postscript" => "ps",
+			"application/x-bittorrent" => "torrent",
+			"application/x-dvi" => "dvi",
+			"application/x-gzip" => "gz",
+			"application/x-ns-proxy-autoconfig" => "pac",
+			"application/x-shockwave-flash" => "swf",
+			"application/x-tgz" => "tar.gz",
+			"application/x-tar" => "tar",
+			"application/zip" => "zip",
+			"audio/mpeg" => "mp3",
+			"audio/x-mpegurl" => "m3u",
+			"audio/x-ms-wma" => "wma",
+			"audio/x-ms-wax" => "wax",
+			"audio/x-wav" => "wav",
+			"image/x-xbitmap" => "xbm",
+			"image/x-xpixmap" => "xpm",
+			"image/x-xwindowdump" => "xwd",
+			"text/css" => "css",
+			"text/html" => "html",
+			"text/javascript" => "js",
+			"text/plain" => "txt",
+			"text/xml" => "xml",
+			"video/mpeg" => "mpeg",
+			"video/quicktime" => "mov",
+			"video/x-msvideo" => "avi",
+			"video/x-ms-asf" => "asf",
+			"video/x-ms-wmv" => "wmv"
+			);
 		if (isset($contentsMaping[$content]))
 			return $contentsMaping[$content];
 		else return $content;
 	}
-	
 	
 	function __saveAs($fileData, $fileName=null, $folder) {
 		
@@ -276,7 +275,6 @@ class ImageBehavior extends ModelBehavior {
 		return  $baseDir .'/'. Inflector::camelize($model->name) .'/'. $record[$model->primaryKey] . '/';
 	}
 	function __getFullFolder(&$model, $field) {
-		//return  WWW_ROOT .$this->__getFolder(&$model, $field);
 		extract($this->settings[$model->name]);
 		return  WWW_ROOT . IMAGES_URL. $baseDir .DS. Inflector::camelize($model->name) .DS. $model->id .DS;
 	}
@@ -290,7 +288,7 @@ class ImageBehavior extends ModelBehavior {
 
 		uses ('folder'); 
 		uses ('file'); 
-		$folder = &new Folder($path = $folderName, $create = true, $mode = '777');
+		$folder = &new Folder($path = $folderName, $create = true, $mode = 0777);
 		
 		$files=$folder->find($fileName);
 		
@@ -310,8 +308,6 @@ class ImageBehavior extends ModelBehavior {
 			$file=$folder->pwd().DS.$fileName;
 			copy($fileData['tmp_name'], $file);
 		}
-
-		
 		
 		if ($fields[$field]['thumbnail']['create']) {
 			$fieldParams=$fields[$field]['thumbnail'];
@@ -351,67 +347,82 @@ class ImageBehavior extends ModelBehavior {
 	 * @return mixed    Either string or echos the value, depends on AUTO_OUTPUT and $return. 
 	 * @access public 
 	 */ 
-    function __resize($folder, $originalName, $newName, $field, $fieldParams) { 
-         
-        $types = array(1 => "gif", "jpeg", "png", "swf", "psd", "wbmp"); // used to determine image type 
-        $fullpath = $folder; 
-     
-        $url = $folder.DS.$originalName; 
-         
-        if (!($size = getimagesize($url)))  
-            return; // image doesn't exist 
-             
+	function __resize($folder, $originalName, $newName, $field, $fieldParams) { 
+		$types = array(1 => "gif", "jpeg", "png", "swf", "psd", "wbmp"); // used to determine image type 
+		$fullpath = $folder;
+		$url = $folder.DS.$originalName; 
+		
+		if (!($size = getimagesize($url)))  
+			return; // image doesn't exist 
+		
+		if (!isset($fieldParams['height']) or !$fieldParams['height']) {
+			$fieldParams['height'] = (int) (($fieldParams['width'] / $size[0]) * $size[1]);
+		} elseif (!isset($fieldParams['width']) or !$fieldParams['width']) {
+			$fieldParams['width'] = (int) (($fieldParams['height'] / $size[1]) * $size[0]);
+		}
+		
 		$width=$fieldParams['width'];
-		$height=$fieldParams['height']; 
-        if ($fieldParams['allow_enlarge']===false) { // don't enlarge image
-			if (($width>$size[0])||($height>$size[1])) {
-				$width=$size[0];
-				$height=$size[1]; 
+		$height=$fieldParams['height'];
+		
+		/* 081016_COUNDCO
+		* Crop function for cropping an image to a desired size
+		*/
+		$src_y = $src_x = 0;
+		if($fieldParams['crop']){
+			if(($size[1]/$height) > ($size[0]/$width)){
+				$projectedHeight = $height*($size[0]/$width);
+				$src_y = ceil( ($size[1]/2)-($projectedHeight/2)  );
+				$size[1] = $projectedHeight;
+			}else{
+				$projectedWidth = $width*($size[1]/$height);
+				$src_x = ceil( ($size[0]/2)-($projectedWidth/2)  );
+				$size[0] = $projectedWidth;
 			}
-		} else {
-	        if ($fieldParams['aspect']) { // adjust to aspect. 
-	            if (($size[1]/$height) > ($size[0]/$width))  // $size[0]:width, [1]:height, [2]:type 
-	                $width = ceil(($size[0]/$size[1]) * $height); 
-	            else  
-	                $height = ceil($width / ($size[0]/$size[1])); 
-	        } 
-        }
-  
-		//$prefix=$this->__getPrefix($fieldParams);
-        //$cachefile = $fullpath.DS.$prefix.'_'.basename($originalName);  // location on server 
-        $cachefile = $fullpath.DS.$newName;  // location on server 
-         
-        if (file_exists($cachefile)) { 
-            $csize = getimagesize($cachefile); 
-            $cached = ($csize[0] == $width && $csize[1] == $height); // image is cached 
-            if (@filemtime($cachefile) < @filemtime($url)) // check if up to date 
-                $cached = false; 
-        } else { 
-            $cached = false; 
-        } 
-         
-        if (!$cached) { 
-            $resize = ($size[0] > $width || $size[1] > $height) || ($size[0] < $width || $size[1] < $height || ($fieldParams['allow_enlarge']===false)); 
-        } else { 
-            $resize = false; 
-        } 
-         
-        if ($resize) { 
-            $image = call_user_func('imagecreatefrom'.$types[$size[2]], $url); 
-            if (function_exists("imagecreatetruecolor") && ($temp = imagecreatetruecolor ($width, $height))) { 
-                imagecopyresampled ($temp, $image, 0, 0, 0, 0, $width, $height, $size[0], $size[1]); 
-              } else { 
-                $temp = imagecreate ($width, $height); 
-                imagecopyresized ($temp, $image, 0, 0, 0, 0, $width, $height, $size[0], $size[1]); 
-            } 
-            call_user_func("image".$types[$size[2]], $temp, $cachefile); 
-            imagedestroy ($image); 
-            imagedestroy ($temp); 
-        }          
-         
-        //return $this->output(sprintf($this->Html->tags['image'], $relfile, $this->Html->parseHtmlOptions($htmlAttributes, null, '', ' ')), $return); 
-    } 
-
-	
-}	
+		}else{
+			if ($fieldParams['allow_enlarge']===false && ($size[0] <= $width || $size[1] <= $height) ) { // don't enlarge image
+					$width=$size[0];
+					$height=$size[1]; 
+			} else {
+				if ($fieldParams['aspect']) { // adjust to aspect. 
+					if (($size[1]/$height) > ($size[0]/$width)){  // $size[0]:width, [1]:height, [2]:type 
+						$width = ceil(($size[0]/$size[1]) * $height);
+					}else{
+						$height = ceil($width / ($size[0]/$size[1]));
+					}
+				}
+			}
+		}
+		
+		$cachefile = $fullpath.DS.$newName;  // location on server
+		
+		if (file_exists($cachefile)) { 
+			$csize = getimagesize($cachefile); 
+			$cached = ($csize[0] == $width && $csize[1] == $height); // image is cached 
+			if (@filemtime($cachefile) < @filemtime($url)) // check if up to date 
+			$cached = false; 
+		} else { 
+			$cached = false; 
+		}
+		
+		if (!$cached) { 
+			$resize = ($size[0] > $width || $size[1] > $height) || ($size[0] < $width || $size[1] < $height || ($fieldParams['allow_enlarge']===false)); 
+		} else { 
+			$resize = false;
+		}
+		
+		if ($resize) {
+			$image = call_user_func('imagecreatefrom'.$types[$size[2]], $url); 
+			if (function_exists("imagecreatetruecolor") && ($temp = imagecreatetruecolor ($width, $height))) { 
+				imagecopyresampled ($temp, $image, 0, 0, 0, 0, $width, $height, $size[0], $size[1]); 
+			} else { 
+				$temp = imagecreate ($width, $height); 
+				imagecopyresized ($temp, $image, 0, 0, 0, 0, $width, $height, $size[0], $size[1]); 
+			} 
+			call_user_func("image".$types[$size[2]], $temp, $cachefile); 
+			imagedestroy ($image); 
+			imagedestroy ($temp); 
+		}
+		//return $this->output(sprintf($this->Html->tags['image'], $relfile, $this->Html->parseHtmlOptions($htmlAttributes, null, '', ' ')), $return); 
+	}
+}
 ?>
