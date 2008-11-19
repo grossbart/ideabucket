@@ -40,12 +40,17 @@
 </head>
 	<!-- ——————————————————————————————————————————————————————————————————— BODY -->
 <body class="default">
-	<div id="header">
-		<h1><?php echo $html->link('IdeaBucket', '/',  array()); ?></h1>
-		<?php echo $this->element('meta'); ?>
-	</div><!-- #header -->
-	<?php echo $this->element('flash'); ?>
 	<div id="container">
+		<div id="header">
+			<h1><?php echo $html->link('IdeaBucket', '/',  array()); ?></h1>
+			<div id="meta">
+				<?php echo $this->element('meta'); ?>
+			</div><!-- #meta -->
+		</div><!-- #header -->
+		<?php echo $this->element('flash'); ?>
+		<div id="teaser">
+			
+		</div><!-- #teaeer -->
 		<div id="content">
 			<?php echo $content_for_layout ?>
 		</div><!-- #content -->
