@@ -4,11 +4,11 @@ class IdeasController extends AppController
 {
 	var $name = 'Ideas';
 	var $paginate = array(
-		'limit' => 20,
-		'order' => array(
-			'Idea.id' => 'asc'
-			)
-		);
+	  'limit' => 20,
+	  'order' => array(
+		  'Idea.modified' => 'desc'
+		)
+	);
 	function add(){
 		if (!empty($this->data)){
 			$this->Idea->create();
