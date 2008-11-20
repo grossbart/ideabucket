@@ -8,7 +8,11 @@
 	<?php foreach ($ideas as $idea): ?>
 	<li>
 		<h3><?php echo $html->link($idea['Idea']['title'], array('action'=>'view', $idea['Idea']['id']), array('class'=>'view_idea', 'title'=>'view this idea')); ?></h3>
-		<?php echo $html->image($idea['Idea']['image']['thumb']); ?>
+		<?php
+		  if (!empty($idea['Idea']['image'])) {
+		    echo $html->image($idea['Idea']['image']['thumb']);
+	    }
+		?>
 		<p><?php echo $idea['Idea']['excerpt']; ?></p>
 		<dl>
 			<dt>Tags</dt><dd><?php echo $idea['Idea']['tags']; ?></dd>
