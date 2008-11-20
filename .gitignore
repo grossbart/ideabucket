@@ -1,3 +1,4 @@
+.DS_Store
 /config/database.php
 /tmp/cache/*
 /tmp/logs/*
