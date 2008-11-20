@@ -9,6 +9,8 @@ class IdeasController extends AppController
 		  'Idea.modified' => 'desc'
 		)
 	);
+	var $helpers = array('Formatter');
+
 	function add(){
 		if (!empty($this->data)){
 			$this->Idea->create();
