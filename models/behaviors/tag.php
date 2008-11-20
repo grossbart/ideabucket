@@ -45,9 +45,7 @@ class TagBehavior extends ModelBehavior {
 	function beforeSave(&$model) {
 		// Define the new tag model
 		$Tag =& new Tag;
-		if ($model->hasField($this->settings[$model->name]['table_label']) 
-		&& $Tag->hasField($this->settings[$model->name]['tag_label'])) {
-
+		if ($Tag->hasField($this->settings[$model->name]['tag_label'])) {
 
 			// Parse out all of the 
 			$tag_list = $this->_parseTag($model->data[$model->name][$this->settings[$model->name]['table_label']], $this->settings[$model->name]);
@@ -64,8 +62,6 @@ class TagBehavior extends ModelBehavior {
 
 			// This prepares the linking table data...
 			$model->data['Tag']['Tag'] = $tag_info;
-			// This formats the tags field before save...
-			$model->data[$model->name][$this->settings[$model->name]['table_label']] = implode(', ', $tag_list);
 		}
 		return true;
 	}

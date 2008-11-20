@@ -38,6 +38,7 @@ class IdeasController extends AppController
 		$this->Idea->id = $id;
 		if (empty($this->data)){
 			$this->data = $this->Idea->read();
+			$this->data['Idea']['tags'] = $this->Idea->tagsToString();
 		}else{
 			if ($this->Idea->save($this->data)){
 				$this->flash('Your Idea has been updated.','/admin/ideas');

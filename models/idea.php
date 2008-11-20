@@ -15,7 +15,7 @@ class Idea extends AppModel
 	var $actsAs= array(
 		'Tag'=>array(
 			'table_label'=>'tags',
-			'tags_label'=>'tag',
+			'tag_label'=>'term',
 			'separator'=>','
 		),
 		'Image'=>array(
@@ -68,6 +68,18 @@ class Idea extends AppModel
 			}
 		}
 		return $results;
+	}
+	
+	function tagsToString() {
+	  if (isset($this->data['Tag']) && !empty($this->data['Tag'])) {
+      $tags = array();
+      foreach ($this->data['Tag'] as $tag) {
+        $tags[] = $tag['term'];
+      }
+      sort($tags);
+      return implode(", ", $tags);
+	  }
+	  return "";
 	}
 }
 
