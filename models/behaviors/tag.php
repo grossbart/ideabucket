@@ -84,7 +84,7 @@ class TagBehavior extends ModelBehavior {
 		$return_array = array();
 		foreach($string_array as $t) {
 		  // Allow Umlauts
-      $t = mb_convert_case($t, MB_CASE_TITLE, "UTF-8");
+      $t = mb_convert_case(trim($t), MB_CASE_TITLE, "UTF-8");
 			if (strlen($t)>0) {
 				$return_array[] = $t;
 			}
