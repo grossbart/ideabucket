@@ -9,9 +9,9 @@ Author URL:		artillery.ch
 * Screen & Projection Styles *
 /////////////////////////////////////////////////////////////////*/
 @import "admin/lib/reset.css";
-@import "admin/lib/forms.css";
-@import "admin/lib/layout.css";
-@import "admin/lib/typography.css";
-@import "admin/lib/widgets.css";
+@import "lib/layout.css";
+@import "lib/typography.css";
+@import "lib/forms.css";
+@import "lib/widgets.css";
 @import "lib/jquery-ui-themeroller.smoothness.css";
 @import "lib/jquery-ui-slider-additions.css";
