@@ -3,13 +3,23 @@
 class TagsController extends AppController
 {
 	var $name = 'Tags';
-	var $helpers = array('Html', 'Form' );
+	var $helpers = array('Html', 'Form', 'Formatter' );
 	var $paginate = array(
 		'limit' => 50,
 		'order' => array(
 			'Tag.id' => 'asc'
 			)
 		);
+		
+	function view($id = null) {
+		$this->Tag->id = $id;
+    $tag = $this->Tag->read();
+    if (empty($tag)) {
+      $this->flash("This tag was not found", "/");
+    } else {
+		  $this->set('tag', $tag);
+	  }
+  }
 	function admin_index(){
 		$this->set('tags', $this->paginate());
 	}

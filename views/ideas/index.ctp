@@ -15,7 +15,17 @@
 		?>
 		<p><?php echo $idea['Idea']['excerpt']; ?></p>
 		<dl>
-			<dt>Tags</dt><dd><?php echo $formatter->tagsToString($idea['Tag']); ?></dd>
+			<dt>Tags</dt>
+			<dd>
+			  <?php
+          $tags = array();
+          foreach ($idea['Tag'] as $tag) {
+            $tags[] = $html->link($tag['term'], array('controller'=>'tags', 'action'=>'view', $tag['id']));
+          }
+          sort($tags);
+          echo implode(", ", $tags);
+			  ?>
+			</dd>
 			<dt>People</dt><dd><?php echo $idea['Idea']['people']; ?></dd>
 			<dt>Costs</dt><dd><?php echo $idea['Idea']['costs']; ?></dd>
 			<dt>Duration</dt><dd><?php echo $idea['Idea']['duration']; ?></dd>

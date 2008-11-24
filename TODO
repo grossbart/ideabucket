@@ -1,1 +1,10 @@
+Bugs
+====
+
+* When a tag gets removed from one idea, it gets removed completely, even though other ideas would still need it.
+
+
+Wishlist
+========
+
 * Implement Google Maps in order to enter locations and, more importantly, find by locations near you.

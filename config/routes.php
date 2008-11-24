@@ -35,6 +35,7 @@
  */
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/', array('controller' => 'ideas', 'action' => 'index'));
+	
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
