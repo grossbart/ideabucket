@@ -12,7 +12,7 @@ function isNumeric(val) {
 
 function formSave(value, settings) { 
   $("#number_of_results").html(parseInt(Math.random() * 200));
-  $.cookie("number_of_persons", value, { expires: 14 });
+  $.cookie($(this).attr("rel"), value, { expires: 14 });
   return(value);
 }
 
@@ -29,15 +29,6 @@ $(document).ready(function() {
       $(this).html(FILLER);
     }
   });
-  
-  // Form for numbers
-  $('.form_number').editable(formSave, { 
-    tooltip   : "Move mouseover to edit...",
-    event     : "mouseover",
-    onblur    : "submit",
-    style     : "inherit",
-    type      : "number"
-  });
 });
 
 
@@ -45,7 +36,7 @@ $(document).ready(function() {
 -----------------------------------------*/
 $.editable.addInputType("number", {
   element : function(settings, original) {
-    var input = $('<input type="text" size="3">');
+    var input = $('<input type="text">');
     $(this).append(input);
     return(input);
   },

@@ -12,6 +12,28 @@
   <script src="js/jquery.cookie.js" type="text/javascript"></script>
   <script src="js/application.js" type="text/javascript"></script>
   
+  <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    // Form for numbers
+    $('[rel=number_of_persons]').editable(formSave, { 
+      tooltip : "Move mouseover to edit...",
+      event   : "mouseover",
+      onblur  : "submit",
+      style   : "inherit",
+      type    : "number"
+    });
+
+    // Form for amount of money
+    $("[rel=date]").editable(formSave, {
+      event  : "mouseover",
+      data   : dateList,
+      type   : "select",
+      onblur : "submit",
+      style  : "inherit"
+    });
+  });
+  </script>
+
   <style type="text/css" media="screen">
     body {
       margin: 2em;
@@ -26,11 +48,15 @@
 </head>
 
 <body>
-  <p>Wir sind <span class="edit form_number" rel="number_of_persons">(anzahl)</span> Personen<br>
-    und haben <span class="edit" rel="date">...</span> (heute (sofort | abend), morgen, am wochenende) lust<br>
+  <p>Wir sind <span class="edit" rel="number_of_persons">(anzahl)</span> Personen<br>
+    und haben <span class="edit" rel="date">
+      <script type="text/javascript" charset="utf-8">
+        var dateList = "{'sofort':'sofort', 'heute abend':'heute abend', 'morgen':'morgen', 'am wochenende':'am wochenende'}";
+      </script>
+    </span> (heute (sofort | abend), morgen, am wochenende) lust<br>
     in der region (autodetect: bla) etwas zu unternehmen<br>
     das wetter ist (autodetect: schön | regnerisch | kalt | schnee)<br>
-    wir möchten dafür ___ franken pro person investieren<br>
+    wir möchten dafür ______ franken pro person investieren<br>
     und haben (viel (den ganzen tag | mehrere tage) | wenig (1h, 2h, 3h)) zeit
   </p>
   
