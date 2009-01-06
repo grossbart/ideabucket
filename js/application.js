@@ -29,6 +29,12 @@ $(document).ready(function() {
       $(this).html(FILLER);
     }
   });
+  
+  $('#clear_cookies').click(function() {
+    $("[rel]").each(function() {
+      $.cookie($(this).attr("rel"), null);
+    });
+  });
 });
 
 
