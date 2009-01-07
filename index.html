@@ -17,7 +17,7 @@
     // Form for numbers
     $('[rel=number_of_persons], [rel=amount_of_money]').editable(formSave, { 
       tooltip : "Move mouseover to edit...",
-      event   : "mouseover",
+      event   : "click",
       onblur  : "submit",
       style   : "inherit",
       type    : "number"
@@ -25,7 +25,7 @@
 
     // Form for amount of money
     $("[rel=date]").editable(formSave, {
-      event  : "mouseover",
+      event  : "click",
       delay  : 1500,
       data   : dateList,
       type   : "select",
@@ -37,7 +37,7 @@
     
     // Form for the available time
     $("[rel=time]").editable(formSave, {
-      event  : "mouseover",
+      event  : "click",
       delay  : 1500,
       data   : timeList,
       type   : "select",
@@ -88,11 +88,27 @@
 
   <hr/>
   
+  <p>Titel</p>
+
+  <p>
+    In Zürich ist tolles wetter<br>
+    wir waren zu dritt am See<br>
+    und haben gebadet.<br>
+  </p>
+
+  <p>Wir waren 3 Personen<br>
+    an einem sonnigen Tag<br>
+    Für die ganzen 3 Stunden haben wir 30 Franken ausgegeben.<br>
+  </p>
+
+
+  <hr/>
+
+  
   <ul>
     <li>Ja, das machen wir!</li>
-    <li>Nein, da hab ich im Moment keinen Bock drauf</li>
-    <li>Nein, das haben wir schon gemacht.</li>
-    <li>Nein, das gefällt mir gar nicht.</li>
+    <li>Heute nicht</li>
+    <li>Pfui, Bäh, NIE!</li>
   </ul>
 </body>
 </html>
