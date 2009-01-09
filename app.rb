@@ -35,8 +35,3 @@ end
 error do
   "Pfui, bäh, en Fehler!"
 end
-
-get '/stylesheet.css' do
-  content_type 'text/css', :charset => 'utf-8'
-  sass :stylesheet
-end
