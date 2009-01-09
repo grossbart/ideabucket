@@ -38,6 +38,44 @@ $(document).ready(function() {
 });
 
 
+/* hook up the forms
+-----------------------------------------*/
+$(document).ready(function() {
+  // Form for numbers
+  $('[rel=number_of_persons], [rel=amount_of_money]').editable(formSave, { 
+    tooltip : "Move mouseover to edit...",
+    event   : "click",
+    onblur  : "submit",
+    style   : "inherit",
+    type    : "number"
+  });
+
+  // Form for amount of money
+  $("[rel=date]").editable(formSave, {
+    event  : "click",
+    delay  : 1500,
+    data   : dateList,
+    type   : "select",
+    onblur : "submit",
+    style  : "inherit"
+  }).change(function() {
+    $('form', this).submit();
+  });
+  
+  // Form for the available time
+  $("[rel=time]").editable(formSave, {
+    event  : "click",
+    delay  : 1500,
+    data   : timeList,
+    type   : "select",
+    onblur : "submit",
+    style  : "inherit"
+  }).change(function() {
+    $('form', this).submit();
+  });
+});
+
+
 /* jeditable input types
 -----------------------------------------*/
 $.editable.addInputType("number", {

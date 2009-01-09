@@ -35,3 +35,15 @@ end
 error do
   "Pfui, bäh, en Fehler!"
 end
+
+helpers do
+  def l(title, path = nil, attributes = {})
+    attributes[:href]  = path ||= title.downcase
+    #attributes[:class] = "active" if request.path_info =~ /(\/?)#{path}/i
+    "<a #{attributes.map{|a,v| "#{a}='#{v}'"}.join(" ")}>#{title}</a>"
+  end
+  
+  def to_attr(hash)
+    attributes.map{|a,v| "#{a}='#{v}'"}.join(" ")
+  end
+end
