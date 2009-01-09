@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Idea Bucket Tests</title>
+	
+  <script src="js/jquery-1.2.6.min.js" type="text/javascript"></script>
+  <script src="js/jquery.jeditable.custom.js" type="text/javascript"></script>
+  <script src="js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="js/application.js" type="text/javascript"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    // Form for numbers
+    $('[rel=number_of_persons], [rel=amount_of_money]').editable(formSave, { 
+      tooltip : "Move mouseover to edit...",
+      event   : "click",
+      onblur  : "submit",
+      style   : "inherit",
+      type    : "number"
+    });
+
+    // Form for amount of money
+    $("[rel=date]").editable(formSave, {
+      event  : "click",
+      delay  : 1500,
+      data   : dateList,
+      type   : "select",
+      onblur : "submit",
+      style  : "inherit"
+    }).change(function() {
+      $('form', this).submit();
+    });
+    
+    // Form for the available time
+    $("[rel=time]").editable(formSave, {
+      event  : "click",
+      delay  : 1500,
+      data   : timeList,
+      type   : "select",
+      onblur : "submit",
+      style  : "inherit"
+    }).change(function() {
+      $('form', this).submit();
+    });
+  });
+  </script>
+  <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen" charset="utf-8">
+</head>
+
+<body>
+  <%= yield %>
+</body>
+</html>
