@@ -18,7 +18,6 @@ end
 
 get '/location' do
   peter = YahooGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
-  wilma = YahooGeocoder.geocode 'Fliederweg 14 Seon Schweiz'
   benji = YahooGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
   haml "%p Von Peter zu Benji sind es #{peter.distance_to(benji).round} Kilometer"
 end
@@ -39,7 +38,7 @@ end
 helpers do
   def l(title, path = nil, attributes = {})
     attributes[:href]  = path ||= title.downcase
-    #attributes[:class] = "active" if request.path_info =~ /(\/?)#{path}/i
+    attributes[:class] = "active" if request.path_info =~ /#{path}$/i
     "<a #{attributes.map{|a,v| "#{a}='#{v}'"}.join(" ")}>#{title}</a>"
   end
   
