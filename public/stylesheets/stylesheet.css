@@ -1,0 +1,24 @@
+body {
+  margin: 2em;
+  font-size: 1.4em;
+  line-height: 1.2;
+}
+
+.edit {
+  font-weight: bold;
+  color: #f07;
+}
+
+ul#navigation {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+ul#navigation li {
+  display: inline;
+  white-space: no-break;
+  padding-right: 0.4em;
+}
+
+a.active {
+  text-decoration: none;
+}

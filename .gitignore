@@ -1,0 +1,7 @@
+.DS_Store
+/app/config/database.php
+/app/tmp/cache/*
+/app/tmp/logs/*
+/app/tmp/sessions/*
+/app/tmp/tests/*
+/app/webroot/img/Idea/*
