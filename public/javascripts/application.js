@@ -45,7 +45,7 @@ $(document).ready(function() {
   $('[rel=number_of_persons], [rel=amount_of_money]').editable(formSave, { 
     tooltip : "Move mouseover to edit...",
     event   : "click",
-    onblur  : "submit",
+    //onblur  : "submit",
     style   : "inherit",
     type    : "number"
   });
@@ -97,3 +97,14 @@ $.editable.addInputType("number", {
     $("input", this).val(value);
   }
 });
+
+
+
+
+
+/* skinning
+-----------------------------------------*/
+// FIXME: geht noch nicht
+/*jQuery(document).ready(function() {
+  $("select.skin").select_skin();
+});*/

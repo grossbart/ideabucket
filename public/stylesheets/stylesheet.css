@@ -22,3 +22,34 @@ ul#navigation li {
 a.active {
   text-decoration: none;
 }
+
+
+/**
+ * Experimente mit Formularen
+ */
+input[type=text] {
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #f07;
+  border-left: 0px solid #fff;
+  font-size: 1em;
+  color: #f07;
+  width: 2em;
+  text-align: center;
+  font-family: inherit;
+}
+input[type=text]:focus {
+  border: 2px inset #bbb;
+  color: #333;
+}
+
+
+
+span.select {
+  position: absolute;
+  width: auto;
+  padding: 0 8px;
+  color: #f07;
+  border-bottom: 2px solid #f07;
+  overflow: hidden;
+}
