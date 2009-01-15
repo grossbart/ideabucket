@@ -31,15 +31,14 @@ http://creativecommons.org/licenses/by-sa/3.0/
 $(document).ready(function() {
   $("select.styled").each(function() {
     $(this).css({position: "relative", zIndex: 5, opacity: 0});
-
-    textnode = document.createTextNode($("option:selected", this).text());
-    var span = $(document.createElement("span"));
-    span.addClass("select");
-    span.attr("id", "select" + this.name);
-    span.append(textnode);
-    $(this).before(span);
     
-    $(this).css({width: totalWidth(span)});
+    var span = $('<span />')
+       .addClass("select")
+       .attr("id", "select" + this.name)
+       .text($("option:selected", this).text());
+    $(this).before(span);
+
+    $(this).css({width: span.width()});
 
     $(this).focus(function() {
       $(this).css({opacity: 100});
@@ -52,15 +51,7 @@ $(document).ready(function() {
     $(this).change(function() {
       $(this).css({opacity: 0});
       $("#select"+this.name).text($("option:selected", this).text());
-      $(this).css({width: totalWidth($("#select"+this.name))});
+      $(this).css({width: $("#select"+this.name).width()});
     });
   });
 });
-
-function totalWidth(el) {
-  el = $(el);
-  width = el.width();
-  width += parseInt(el.css("padding-left")) + parseInt(el.css("padding-right"));
-  width += parseInt(el.css("margin-left")) + parseInt(el.css("margin-right"));
-  return width;
-}

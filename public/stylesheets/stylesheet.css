@@ -47,8 +47,6 @@ input[type=text]:focus {
 
 span.select {
   position: absolute;
-  width: auto;
-  padding: 0 8px;
   color: #f07;
   border-bottom: 2px solid #f07;
   overflow: hidden;
