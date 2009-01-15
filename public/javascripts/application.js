@@ -102,9 +102,10 @@ $.editable.addInputType("number", {
 
 
 
-/* skinning
+/* Style select elements
 -----------------------------------------*/
-// FIXME: geht noch nicht
-/*jQuery(document).ready(function() {
-  $("select.skin").select_skin();
-});*/
+jQuery(document).ready(function() {
+  $("select.styled").each(function() {
+    $(this).styledselect();
+  });
+});
