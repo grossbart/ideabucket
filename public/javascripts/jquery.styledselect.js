@@ -13,8 +13,13 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 */
 
-jQuery.fn.styledselect = function() {
+jQuery.fn.styledselect = function(options) {
+  
+  settings = jQuery.extend({
+    onchange: function(){console.log("uhu")}
+  }, options);
 
+  
   // Only accept select elements:
   if (!$(this).is("select")) return false;
 
@@ -40,5 +45,6 @@ jQuery.fn.styledselect = function() {
     $(this).css({opacity: 0});
     $("#select_"+$(this).attr("name")).text($("option:selected", this).text());
     $(this).css({width: $("#select_"+$(this).attr("name")).width()});
+    settings.onchange.call(this);
   });
 }

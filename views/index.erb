@@ -1,16 +1,22 @@
-<p>Wir sind <span class="edit" rel="number_of_persons">(anzahl)</span> Personen<br>
-  und haben <span class="edit" rel="date">
-    <script type="text/javascript" charset="utf-8">
-      var dateList = "{'sofort':'sofort', 'heute abend':'heute abend', 'morgen':'morgen', 'am wochenende':'am wochenende'}";
-    </script>
+<p>Wir sind <span><form style="display: inline;"><input name="value" type="text" rel="headcount"/></form></span> Personen<br>
+  und haben <span><form style="display: inline">
+    <select name="when" class="styled" rel="when">
+      <option value="1">sofort</option>
+      <option value="2">heute abend</option>
+      <option value="3">morgen</option>
+      <option value="4">am Wochenende</option>
+    </select>
   </span> lust<br>
   in der region <span style="color: #f07">Lenzburg</span> (autodetect, dropdown) etwas zu unternehmen<br>
   das wetter ist <span style="color: #f07">schneeig</span> (autodetect, dropdown)<br>
-  wir möchten dafür nicht mehr als <span class="edit" rel="amount_of_money">(anzahl)</span> franken pro person investieren<br>
-  und haben <span class="edit" rel="time">
-    <script type="text/javascript" charset="utf-8">
-      var timeList = "{'1 Stunde':'1 Stunde', '2 Stunden':'2 Stunden', '3 Stunden':'3 Stunden', 'den ganzen Tag':'den ganzen Tag', 'mehrere Tage':'mehrere Tage'}"
-    </script>
+  wir möchten dafür nicht mehr als <span><form style="display: inline;"><input name="value" type="text" rel="money" /></form></span> franken pro person investieren<br>
+  und haben <span><form style="display: inline">
+    <select name="duration" class="styled" rel="duration">
+      <option value="1">1 Stunde</option>
+      <option value="2">einige Stunden</option>
+      <option value="3">den ganzen Tag</option>
+      <option value="4">mehrere Tage</option>
+    </select>
   </span>
   zeit.
 </p>
@@ -21,34 +27,7 @@
   <strong>&rArr; <span id="number_of_results">3157</span> Vorschläge</strong>
 </p>
 
-
 <hr/>
-
-<h2>Variante nur mit Formularen (wegen Tabbing)</h2>
-
-<p>Wir sind <span><form style="display: inline;"><input name="value" type="text"></form></span> Personen<br>
-  und haben <span><form style="display: inline">
-    <select name="when" class="styled">
-      <option>sofort</option>
-      <option>heute abend</option>
-    </select>
-  </span> lust<br>
-  in der region <span style="color: #f07">Lenzburg</span> (autodetect, dropdown) etwas zu unternehmen<br>
-  das wetter ist <span style="color: #f07">schneeig</span> (autodetect, dropdown)<br>
-  wir möchten dafür nicht mehr als <span><form style="display: inline;"><input name="value" type="text"></form></span> franken pro person investieren<br>
-  und haben <span><form style="display: inline">
-    <select name="duration" class="styled">
-      <option value="1">1 Stunde</option>
-      <option value="2">einige Stunden</option>
-      <option value="3">den ganzen Tag</option>
-      <option value="4">mehrere Tage</option>
-    </select>
-  </span>
-  zeit.
-</p>
-
-<hr/>
-
 
 <ul>
   <li>Ja, das machen wir!</li>
