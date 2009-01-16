@@ -5,3 +5,4 @@
 /app/tmp/sessions/*
 /app/tmp/tests/*
 /app/webroot/img/Idea/*
+*.tmproj
