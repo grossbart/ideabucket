@@ -21,7 +21,7 @@ $(document).ready(function() {
     }
   });
   
-  $("input[rel]").each(function() {
+  $("body.index input[rel]").each(function() {
     var id = $(this).attr("rel");
     if ($.cookie(id)) {
       $(this).attr("value", $.cookie(id));
@@ -30,6 +30,17 @@ $(document).ready(function() {
       $("#number_of_results").html(parseInt(Math.random() * 200));
       $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
     });
+  });
+  
+  $(".whisper input").each(function() {
+    $(this).focus(function() {
+      $(this).closest("p").removeClass("whisper");
+    });
+    $(this).blur(function() {
+      if ($(this).val() == "" || $(this).val() == "0") {
+        $(this).closest("p").addClass("whisper");
+      }
+    })
   });
 
   

@@ -23,6 +23,15 @@ a.active {
   text-decoration: none;
 }
 
+.whisper {
+  font-size: 0.8em;
+  color: #aaa;
+}
+.silent {
+  font-size: 0.8em;
+  color: #eee;
+}
+
 
 /**
  * Experimente mit Formularen
@@ -42,6 +51,15 @@ input[type=text]:focus {
   border: 2px inset #bbb;
   color: #333;
 }
+input[type=text].longtext {
+  width: 6em;
+  text-align: left;
+}
+
+input[type=text].extralongtext {
+  width: 12em;
+  text-align: left;
+}
 
 
 
@@ -50,4 +68,13 @@ span.select {
   color: #f07;
   border-bottom: 2px solid #f07;
   overflow: hidden;
+}
+
+
+#letterbody p {
+  margin: 0; padding: 0;
+}
+.whisper input[type=text] {
+  border-bottom: 2px solid #ddd;
+  color: #aaa;
 }

@@ -1,13 +1,52 @@
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    var money = $("input[rel=money]");
+    var addendum = $(".add_money");
+    addendum.hide();
+    money.css({width: "4.5em"})
+    money.attr("value", "war gratis");
+    money.focus(function() {
+      $(this).attr("value", "");
+      addendum.show();
+    });
+    money.blur(function() {
+      if ($(this).val() == "" || $(this).val() == 0) {
+        $(this).attr("value", "war gratis");
+        addendum.hide();
+      }
+    });
+  });
+</script>
 
-<p>Titel</p>
+<p>Liebe Freunde</p>
+
+<div id="letterbody">
+
+  <p>Zusammen mit <span><form style="display: inline;"><input name="value" type="text" rel="headcount"/></form></span> Freunden habe ich <span><form style="display: inline;"><input name="value" type="text" rel="activity" class="extralongtext"/></form></span>.</p>
+
+  <p class="whisper">Das war am <span><form style="display: inline;"><input name="value" type="text" rel="date" class="longtext"/></form></span> <span class="silent">(wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?)</span></p>
+
+  <p class="whisper">in <span><form style="display: inline;"><input name="value" type="text" rel="locality" class="longtext" /></form></span>.</p>
+
+  <p class="whisper">Es <span class="add_money">hat pro Person</span> <span><form style="display: inline;"><input name="value" type="text" rel="money"/></form></span> <span class="add_money">Franken gekostet</span>.</p>
+
+  <p class="whisper">und hat <span><form style="display: inline;"><input name="value" type="text" rel="duration"/></form></span> Stunden gedauert.</p>
+
+</div>
+
+<p>Probierts doch auch mal!</p>
+
+<p>Liebe Grüsse, <span><form style="display: inline;"><input name="value" type="text" rel="sender" class="longtext"/></form></span></p>
+
+
+<ol class="whisper">
+  <li><strong>Postkarte schreiben</strong></li>
+  <li><a href="#">Postkarte verpacken</a> (Foto hinzufügen)</li>
+  <li><a href="#">Postkarte versenden</a> (Titel hinzufügen)</li>
+</ol>
+
+<hr/>  
 
 <p>
-  In Zürich ist tolles wetter<br>
-  wir waren zu dritt am See<br>
-  und haben gebadet.<br>
-</p>
-
-<p>Wir waren 3 Personen<br>
-  an einem sonnigen Tag<br>
-  Für die ganzen 3 Stunden haben wir 30 Franken ausgegeben.<br>
+  (Wetter ableiten aus Datum, Ort)
 </p>
