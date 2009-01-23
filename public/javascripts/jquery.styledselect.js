@@ -16,7 +16,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 jQuery.fn.styledselect = function(options) {
   
   settings = jQuery.extend({
-    onchange: function(){console.log("uhu")}
+    onchange: function(){}
   }, options);
 
   

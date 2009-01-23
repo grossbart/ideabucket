@@ -1,15 +1,15 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-    var money = $("input[rel=money]");
-    var addendum = $(".add_money");
+    var expenses = $("input[rel=expenses]");
+    var addendum = $(".add_expenses");
     addendum.hide();
-    money.css({width: "4.5em"})
-    money.attr("value", "war gratis");
-    money.focus(function() {
+    expenses.css({width: "4.5em"})
+    expenses.attr("value", "war gratis");
+    expenses.focus(function() {
       $(this).attr("value", "");
       addendum.show();
     });
-    money.blur(function() {
+    expenses.blur(function() {
       if ($(this).val() == "" || $(this).val() == 0) {
         $(this).attr("value", "war gratis");
         addendum.hide();
@@ -18,26 +18,31 @@
   });
 </script>
 
-<p>Liebe Freunde</p>
+<form action="/create" method="post">
+  
+  <p>Liebe Freunde</p>
 
-<div id="letterbody">
+  <div id="letterbody">
 
-  <p>Zusammen mit <span><form style="display: inline;"><input name="value" type="text" rel="headcount"/></form></span> Freunden habe ich <span><form style="display: inline;"><input name="value" type="text" rel="activity" class="extralongtext"/></form></span>.</p>
+    <p>Zusammen mit <span><input name="persons" type="text" rel="persons"/></span> Freunden habe ich <span><input name="title" type="text" rel="activity" class="extralongtext"/></span>.</p>
 
-  <p class="whisper">Das war am <span><form style="display: inline;"><input name="value" type="text" rel="date" class="longtext"/></form></span> <span class="silent">(wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?)</span></p>
+    <p class="whisper">Das war am <span><input name="date" type="text" rel="date" class="longtext"/></span> <span class="silent">(wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?)</span></p>
 
-  <p class="whisper">in <span><form style="display: inline;"><input name="value" type="text" rel="locality" class="longtext" /></form></span>.</p>
+    <p class="whisper">in <span><input name="location" type="text" rel="location" class="longtext" /></span>.</p>
 
-  <p class="whisper">Es <span class="add_money">hat pro Person</span> <span><form style="display: inline;"><input name="value" type="text" rel="money"/></form></span> <span class="add_money">Franken gekostet</span>.</p>
+    <p class="whisper">Es <span class="add_expenses">hat pro Person</span> <span><input name="expenses" type="text" rel="expenses"/></span> <span class="add_expenses">Franken gekostet</span>.</p>
 
-  <p class="whisper">und hat <span><form style="display: inline;"><input name="value" type="text" rel="duration"/></form></span> Stunden gedauert.</p>
+    <p class="whisper">und hat <span><input name="duration" type="text" rel="duration"/></span> Stunden gedauert.</p>
+    
+  </div>
 
-</div>
+  <p>Probierts doch auch mal!</p>
 
-<p>Probierts doch auch mal!</p>
+  <p>Liebe Grüsse, <span><input name="author" type="text" rel="sender" class="longtext"/></span></p>
 
-<p>Liebe Grüsse, <span><form style="display: inline;"><input name="value" type="text" rel="sender" class="longtext"/></form></span></p>
+  <p><input type="submit" value="Speichern"/></p>
 
+</form>
 
 <ol class="whisper">
   <li><strong>Postkarte schreiben</strong></li>

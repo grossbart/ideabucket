@@ -2,11 +2,32 @@
 
 require 'rubygems'
 require 'sinatra'
+require 'activerecord'
 require 'geokit'
 require 'yahoo-weather'
 
 include Geokit::Geocoders
 Geokit::default_units = :kilometers
+
+configure do
+  ActiveRecord::Base.establish_connection(
+    :adapter => 'sqlite3',
+    :dbfile =>  'db/app.sqlite3.db'
+  )
+end
+
+
+class Idea < ActiveRecord::Base
+  # id
+  # author
+  # title
+  # persons
+  # duration
+  # expenses
+  # date
+  # location
+end
+
 
 get '/' do
   erb :index
@@ -14,6 +35,12 @@ end
 
 get '/create' do
   erb :create
+end
+
+post '/create' do
+  request.POST['duration'] = request.POST['duration'].to_i # kann text sein wenn 0
+  idea = Idea.new(request.POST)
+  idea.save
 end
 
 get '/location' do
