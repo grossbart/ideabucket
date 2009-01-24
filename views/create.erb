@@ -15,6 +15,22 @@
         addendum.hide();
       }
     });
+    
+    
+    // Autocompletion
+    $("#autocomplete_location").autoCompleter("/suggest_location.json", {
+      method: "POST",
+      delay: 1000,
+      minChars: 3,
+      autoWidth: false,
+      /*
+      queryCallback: function(successCallback) {
+        var fakeData = {
+          results: [ "Debian", "Sidux" ],
+        }
+        successCallback(fakeData);
+      }*/
+    });
   });
 </script>
 
@@ -28,7 +44,7 @@
 
     <p class="whisper">Das war am <span><input name="date" type="text" rel="date" class="longtext"/></span> <span class="silent">(wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?)</span></p>
 
-    <p class="whisper">in <span><input name="location" type="text" rel="location" class="longtext" /></span>.</p>
+    <p class="whisper">in <span><input name="location" type="text" rel="location" class="extralongtext" id="autocomplete_location"/></span>.</p>
 
     <p class="whisper">Es <span class="add_expenses">hat pro Person</span> <span><input name="expenses" type="text" rel="expenses"/></span> <span class="add_expenses">Franken gekostet</span>.</p>
 

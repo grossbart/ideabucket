@@ -1,19 +1,34 @@
 # run with `ruby app.rb`
 
 require 'rubygems'
+require 'json'
 require 'sinatra'
 require 'activerecord'
 require 'geokit'
 require 'yahoo-weather'
 
+# FIXME: why doesn't the gem work?
+# require 'google-geo'
+require 'lib/google/geo'
+
+
+
 include Geokit::Geocoders
 Geokit::default_units = :kilometers
+
+
+API_KEY = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg'
+
+
 
 configure do
   ActiveRecord::Base.establish_connection(
     :adapter => 'sqlite3',
     :dbfile =>  'db/app.sqlite3.db'
   )
+  
+  # Only valid for http://localhost/
+  Geokit::Geocoders::google = API_KEY
 end
 
 
@@ -56,9 +71,15 @@ get '/list' do
   erb :list
 end
 
+post '/suggest_location.json' do
+  geo = Google::Geo.new API_KEY
+  addresses = geo.locate params[:q]
+  {"results" => addresses}.to_json
+end
+
 get '/location' do
-  peter = YahooGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
-  benji = YahooGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
+  peter = GoogleGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
+  benji = GoogleGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
   haml "%p Von Peter zu Benji sind es #{peter.distance_to(benji).round} Kilometer"
 end
 
