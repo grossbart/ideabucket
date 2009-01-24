@@ -38,9 +38,22 @@ get '/create' do
 end
 
 post '/create' do
-  request.POST['duration'] = request.POST['duration'].to_i # kann text sein wenn 0
-  idea = Idea.new(request.POST)
+  params[:duration] = params[:duration].to_i # kann text sein wenn 0
+  params[:persons] = params[:persons].to_i + 1 # man selbst gehört auch dazu
+  idea = Idea.new(params)
   idea.save
+  redirect '/create'
+end
+
+delete '/delete' do
+  idea = Idea.find(params[:id])
+  idea.destroy
+  redirect '/list'
+end
+
+get '/list' do
+  @ideas = Idea.find(:all)
+  erb :list
 end
 
 get '/location' do

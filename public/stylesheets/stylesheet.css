@@ -32,6 +32,11 @@ a.active {
   color: #eee;
 }
 
+td {
+  border: 1px solid #ddd;
+  background: #eee;
+}
+
 
 /**
  * Experimente mit Formularen
