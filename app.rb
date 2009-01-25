@@ -1,7 +1,6 @@
 # run with `ruby app.rb`
 
 require 'rubygems'
-require 'json'
 require 'sinatra'
 require 'activerecord'
 require 'geokit'
@@ -10,7 +9,6 @@ require 'yahoo-weather'
 # FIXME: why doesn't the gem work?
 # require 'google-geo'
 require 'lib/google/geo'
-
 
 
 include Geokit::Geocoders
@@ -73,8 +71,8 @@ end
 
 post '/suggest_location.json' do
   geo = Google::Geo.new API_KEY
-  addresses = geo.locate params[:q]
-  {"results" => addresses}.to_json
+  addresses = geo.locate(params[:q] + " schweiz") # HACK: Eingrenzen auf die Schweiz
+  {"results" => addresses.map{|a| a.to_s}}.to_json
 end
 
 get '/location' do

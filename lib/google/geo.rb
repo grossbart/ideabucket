@@ -52,7 +52,7 @@ class  Geo
   
   # Generate a request URI from a given search string.
   def uri(address) #:nodoc:
-    "http://maps.google.com/maps/geo?q=#{URI.escape address}&key=#{key}&output=xml"
+    "http://maps.google.com/maps/geo?q=#{URI.escape address}&key=#{key}&output=xml&hl=de&oe=utf-8" #FIXME: make this configurable
   end
   private :uri
   
