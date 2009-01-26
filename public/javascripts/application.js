@@ -49,6 +49,12 @@ $(document).ready(function() {
       $.cookie($(this).attr("rel"), null);
     });
   });
+	$('abbr').each(function(){
+		var dt = $(this).html();
+		var dd = $(this).attr('alt');
+		var note = '<dt>' + dt + '</dt><dd>' + dd + '</dd>';
+		$('dl.notes').append(note)
+	})
 });
 
 

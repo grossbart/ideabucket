@@ -1,14 +1,33 @@
-body {
-  margin: 2em;
-  font-size: 1.4em;
-  line-height: 1.2;
-}
+@charset "utf-8";
+/*
+Styling:			Page Layout and element specific stylings
+Version:			0.1
+Author:				Benjamin Wiederkehr
+Start:				090126_BW
+Last update:	090126_BW
+Copyright:		ideabucket.ch */
 
-.edit {
-  font-weight: bold;
-  color: #f07;
-}
+@import 'reset.css';
+@import 'typography.css';
 
+/* HTML & Body
+/////////////////////////////////////////////////////////////////*/
+html, body{
+  padding: 0 0 2em;
+  background: #FFF;
+}
+#header{
+  margin: 0 auto 20px;
+  width: 680px;
+}
+#header h1 span.subheader{color:#aaa;font-size:0.5em;text-transform:uppercase;}
+#content{
+  font-size: 1.333em;
+  margin: 0 auto;
+  width: 680px;
+}
+/* Navigation
+/////////////////////////////////////////////////////////////////*/
 ul#navigation {
   list-style: none;
   margin: 0; padding: 0;
@@ -18,29 +37,8 @@ ul#navigation li {
   white-space: no-break;
   padding-right: 0.4em;
 }
-
-a.active {
-  text-decoration: none;
-}
-
-.whisper {
-  font-size: 0.8em;
-  color: #aaa;
-}
-.silent {
-  font-size: 0.8em;
-  color: #eee;
-}
-
-td {
-  border: 1px solid #ddd;
-  background: #eee;
-}
-
-
-/**
- * Experimente mit Formularen
- */
+/* Experimente mit Formularen
+/////////////////////////////////////////////////////////////////*/
 input[type=text] {
   border-top: 2px solid #fff;
   border-right: 2px solid #fff;
@@ -60,22 +58,16 @@ input[type=text].longtext {
   width: 6em;
   text-align: left;
 }
-
 input[type=text].extralongtext {
   width: 20em;
   text-align: left;
 }
-
-
-
 span.select {
   position: absolute;
   color: #f07;
   border-bottom: 2px solid #f07;
   overflow: hidden;
 }
-
-
 #letterbody p {
   margin: 0; padding: 0;
 }
@@ -83,12 +75,8 @@ span.select {
   border-bottom: 2px solid #ddd;
   color: #aaa;
 }
-
-
-
-/**
- * Autocomplete
- */
+/* Autocomplete
+/////////////////////////////////////////////////////////////////*/
 .autocompleter {
   border: 4px solid #ccc;
   color: #666;
@@ -97,16 +85,18 @@ span.select {
   position: absolute;
   font-size: 1em;
 }
-
-/* A normal row */
 .autocompleter .row {
   cursor: default;
   padding: 8px 20px;
   border-bottom: 1px solid #ccc;
 }
-
-/* A selected row */
 .autocompleter .selected {
   color: #f07;
   background-color: #fff;
 }
+/* Self-Clearing Floats
+/////////////////////////////////////////////////////////////////*/
+.clearfix:after {content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.clearfix { display:inline-block;}
+html[xmlns] .clearfix { display:block;}
+* html .clearfix { height:1%;}

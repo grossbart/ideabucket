@@ -33,41 +33,21 @@
     });
   });
 </script>
-
 <form action="/create" method="post">
-  
   <p>Liebe Freunde</p>
-
   <div id="letterbody">
-
     <p>Zusammen mit <span><input name="persons" type="text" rel="persons"/></span> Freunden habe ich <span><input name="title" type="text" rel="activity" class="extralongtext"/></span>.</p>
-
-    <p class="whisper">Das war am <span><input name="date" type="text" rel="date" class="longtext"/></span> <span class="silent">(wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?)</span></p>
-
-    <p class="whisper">in <span><input name="location" type="text" rel="location" class="extralongtext" id="autocomplete_location"/></span>.</p>
-
+    <p class="whisper">Das war am <span><input name="date" type="text" rel="date" class="longtext"/></span> <abbr class="note" alt="wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?">1</abbr></p>
+    <p class="whisper">in <span><input name="location" type="text" rel="location" class="extralongtext" id="autocomplete_location"/></span> <abbr class="note" alt="wetter ableiten aus datum, ort">2</abbr>.</p>
     <p class="whisper">Es <span class="add_expenses">hat pro Person</span> <span><input name="expenses" type="text" rel="expenses"/></span> <span class="add_expenses">Franken gekostet</span>.</p>
-
     <p class="whisper">und hat <span><input name="duration" type="text" rel="duration"/></span> Stunden gedauert.</p>
-    
   </div>
-
   <p>Probierts doch auch mal!</p>
-
   <p>Liebe Grüsse, <span><input name="author" type="text" rel="sender" class="longtext"/></span></p>
-
   <p><input type="submit" value="Speichern"/></p>
-
 </form>
-
 <ol class="whisper">
   <li><strong>Postkarte schreiben</strong></li>
   <li><a href="#">Postkarte verpacken</a> (Foto hinzufügen)</li>
   <li><a href="#">Postkarte versenden</a> (Titel hinzufügen)</li>
 </ol>
-
-<hr/>  
-
-<p>
-  (Wetter ableiten aus Datum, Ort)
-</p>
