@@ -15,7 +15,7 @@ include Geokit::Geocoders
 Geokit::default_units = :kilometers
 
 
-API_KEY = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg'
+@api_key = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg'
 
 
 
@@ -26,7 +26,7 @@ configure do
   )
   
   # Only valid for http://localhost/
-  Geokit::Geocoders::google = API_KEY
+  Geokit::Geocoders::google = @api_key
 end
 
 
@@ -80,7 +80,7 @@ get '/list' do
 end
 
 post '/suggest_location.json' do
-  geo = Google::Geo.new API_KEY
+  geo = Google::Geo.new @api_key
   addresses = geo.locate(params[:q] + " schweiz") # HACK: Eingrenzen auf die Schweiz
   {"results" => addresses.map{|a| a.to_s}}.to_json
 end
