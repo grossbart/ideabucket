@@ -75,6 +75,10 @@ span.select {
   border-bottom: 2px solid #ddd;
   color: #aaa;
 }
+.whisper span.select {
+  border-bottom: 2px solid #ddd;
+  color: #aaa;
+}
 /* Autocomplete
 /////////////////////////////////////////////////////////////////*/
 .autocompleter {

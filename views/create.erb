@@ -36,9 +36,31 @@
 <form action="/create" method="post">
   <p>Liebe Freunde</p>
   <div id="letterbody">
-    <p>Zusammen mit <span><input name="persons" type="text" rel="persons"/></span> Freunden habe ich <span><input name="title" type="text" rel="activity" class="extralongtext"/></span>.</p>
-    <p class="whisper">Das war am <span><input name="date" type="text" rel="date" class="longtext"/></span> <abbr class="note" alt="wie klar machen, dass z.b. an jedem wochenende möglich? oder an jedem tag? ableiten?">1</abbr></p>
-    <p class="whisper">in <span><input name="location" type="text" rel="location" class="extralongtext" id="autocomplete_location"/></span> <abbr class="note" alt="wetter ableiten aus datum, ort">2</abbr>.</p>
+    <p>Zusammen mit <span><input name="persons" type="text" rel="persons"/></span> Freunden habe ich <span><input name="title" type="text" rel="activity" class="extralongtext"/></span></p>
+    <p class="whisper">Das war in <span><input name="location" type="text" rel="location" class="extralongtext" id="autocomplete_location"/></span> <abbr class="note" alt="Autocomplete spinnt noch">1</abbr>.</p>
+    <p class="whisper">Das kann man 
+      <span>
+        <select name="date" class="styled" rel="date">
+          <option value="1">jederzeit</option>
+          <option value="2">vor allem abends</option>
+          <option value="3">vor allem an Wochenenden</option>
+        </select>
+      </span>
+    </p>
+    <p class="whisper">
+      <span>
+        <select name="weather" class="styled" rel="weather">
+          <option value="0">bei jedem Wetter</option>
+          <option value="1">bei gutem Wetter</option>
+          <option value="2">bei schlechtem Wetter</option>
+          <option value="3">wenn's warm ist</option>
+          <option value="4">wenn's regnet</option>
+          <option value="5">wenn's Schnee hat</option>
+        </select>
+      </span>
+      <abbr class="note" alt="Was für Wetter gibt es so? Muss man das aufteilen? Wie kann das so einfach wie möglich gehalten werden, so dass man sich trotzdem ausdrücken kann?">2</abbr>
+      machen.
+    </p>
     <p class="whisper">Es <span class="add_expenses">hat pro Person</span> <span><input name="expenses" type="text" rel="expenses"/></span> <span class="add_expenses">Franken gekostet</span>.</p>
     <p class="whisper">und hat <span><input name="duration" type="text" rel="duration"/></span> Stunden gedauert.</p>
   </div>

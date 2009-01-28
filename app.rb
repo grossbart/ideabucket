@@ -43,7 +43,7 @@ end
 
 
 get '/' do
-  erb :index
+  erb :find
 end
 
 get '/create' do
