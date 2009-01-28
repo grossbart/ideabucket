@@ -11,10 +11,10 @@ Finden
 * Spezielle Suchen implementieren, z.B. für Datumstyp "4" (morgen)
 * Suchen "unscharf" machen, Elemente gewichten.
 
-Suchen
-======
+Erstellen
+=========
 
 * Wahl, ob Stunden oder Tage (drop-down?)
 * Evtl. Trennung zwischen optionalen und notwendigen Optionen beim Erstellen weglassen ("whisper")
 * FIXME: JS Autocomplete ist noch nicht gut (liegt am verwendeten Skript)
-
+* TODO: wie soll das mit den Bildern gehandhabt werden?
