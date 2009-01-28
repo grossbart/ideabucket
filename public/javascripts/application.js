@@ -10,6 +10,17 @@ function isNumeric(val) {
   return RE.test(val);
 }
 
+function updateResults(name, value) {
+  $.post("/find", {"id": name, "value": value}, function(data, status) {
+    if (status == 'success') {
+      html = data;
+    } else {
+      html = "<p>Nichts gefunden...</p>";
+    }
+    $("#results").html(html);
+  });
+}
+
 
 /* Run when document is ready
 -----------------------------------------*/
@@ -27,11 +38,11 @@ $(document).ready(function() {
       $(this).attr("value", $.cookie(id));
     }
     $(this).blur(function() {
-      $("#number_of_results").html(parseInt(Math.random() * 200));
       $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
+      updateResults($(this).attr("name"), $(this).val());
     });
   });
-  
+
   $(".whisper input").each(function() {
     $(this).focus(function() {
       $(this).closest("p").removeClass("whisper");
@@ -64,8 +75,8 @@ jQuery(document).ready(function() {
   $("select.styled").each(function() {
     $(this).styledselect({
       onchange: function() {
-        $("#number_of_results").html(parseInt(Math.random() * 200));
         $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
+        updateResults($(this).attr("name"), $(this).val());
       }
     });
   });

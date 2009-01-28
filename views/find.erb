@@ -1,6 +1,6 @@
-<p>Wir sind <span><form class="madlib"><input name="value" type="text" rel="persons"/></form></span> Personen<br>
+<p>Wir sind <span><form class="madlib"><input name="persons" type="text" rel="persons"/></form></span> Personen<br>
   und haben <span><form class="madlib">
-    <select name="when" class="styled" rel="when">
+    <select name="date" class="styled" rel="date">
       <option value="1">sofort</option>
       <option value="2">heute abend</option>
       <option value="4">morgen</option>
@@ -9,7 +9,7 @@
   </span> lust<br>
   in der region <span class="edit">Lenzburg</span> <abbr class="note" alt="autodetect, dropdown">1</abbr> etwas zu unternehmen<br>
   das wetter ist <span class="edit">schneeig</span> <abbr class="note" alt="autodetect, dropdown">2</abbr><br>
-  wir möchten dafür nicht mehr als <span><form class="madlib"><input name="value" type="text" rel="expenses" /></form></span> franken pro person investieren<br>
+  wir möchten dafür nicht mehr als <span><form class="madlib"><input name="expenses" type="text" rel="expenses" /></form></span> franken pro person investieren<br>
   und haben <span><form class="madlib">
     <select name="duration" class="styled" rel="duration">
       <option value="1">1 Stunde</option>
@@ -21,6 +21,9 @@
   zeit.
 </p>
 <p><a href="" id="clear_cookies">(löschen)</a></p>
+
+<div id="results"></div>
+
 <p>
-  <strong>&rArr; <span id="number_of_results">3157</span> Vorschläge <abbr class="note" alt="Ja, das machen wir! Heute nicht. Pfui, Bäh, NIE!">3</abbr></strong>
+  <abbr class="note" alt="Ja, das machen wir! Heute nicht. Pfui, Bäh, NIE!">3</abbr>
 </p>

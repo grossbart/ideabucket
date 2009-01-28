@@ -39,11 +39,21 @@ class Idea < ActiveRecord::Base
   # expenses
   # date
   # location
+  
+  def self.find_random_by_type(type, value)
+    results = find(:all, :conditions => "#{type} = #{value}")
+    results[rand(results.size)]
+  end
 end
 
 
 get '/' do
   erb :find
+end
+
+post '/find' do
+  @idea = Idea.find_random_by_type(params[:id], params[:value])
+  erb :result, :layout => false
 end
 
 get '/create' do
