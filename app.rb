@@ -6,8 +6,8 @@ require 'activerecord'
 require 'geokit'
 require 'yahoo-weather'
 
-# FIXME: why doesn't the gem work?
-# require 'google-geo'
+# The gem is momentarily disabled as there are important bugfixes in our own copy
+# require 'google/geo'
 require 'lib/google/geo'
 
 

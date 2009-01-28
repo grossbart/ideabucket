@@ -5,4 +5,4 @@ Dependencies
 * activerecord
 * geokit
 * yahoo-weather
-* google-geo gem (sudo gem install greatseth-google-geo)
+* google-geo
