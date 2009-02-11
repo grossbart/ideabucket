@@ -11,97 +11,20 @@ require 'yahoo-weather'
 require 'lib/google/geo'
 
 
+#
+# Configuration
+#
+API_KEY = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg' unless defined? API_KEY
 include Geokit::Geocoders
 Geokit::default_units = :kilometers
-
-
-@api_key = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg'
-
-
 
 configure do
   ActiveRecord::Base.establish_connection(
     :adapter => 'sqlite3',
     :dbfile =>  'db/app.sqlite3.db'
   )
-  
-  # Only valid for http://localhost/
-  Geokit::Geocoders::google = @api_key
-end
-
-
-class Idea < ActiveRecord::Base
-  # id
-  # author
-  # title
-  # persons
-  # duration
-  # expenses
-  # date
-  # location
-  
-  def self.find_random_by_type(type, value)
-    results = find(:all, :conditions => "#{type} = #{value}")
-    results[rand(results.size)]
-  end
-end
-
-
-get '/' do
-  erb :find
-end
-
-post '/find' do
-  @idea = Idea.find_random_by_type(params[:id], params[:value])
-  erb :result, :layout => false
-end
-
-get '/create' do
-  erb :create
-end
-
-post '/create' do
-  params[:duration] = params[:duration].to_i # kann text sein wenn 0
-  params[:persons] = params[:persons].to_i + 1 # man selbst gehört auch dazu
-  idea = Idea.new(params)
-  idea.save
-  redirect '/create'
-end
-
-delete '/delete' do
-  idea = Idea.find(params[:id])
-  idea.destroy
-  redirect '/list'
-end
-
-get '/list' do
-  @ideas = Idea.find(:all)
-  erb :list
-end
-
-post '/suggest_location.json' do
-  geo = Google::Geo.new @api_key
-  addresses = geo.locate(params[:q] + " schweiz") # HACK: Eingrenzen auf die Schweiz
-  {"results" => addresses.map{|a| a.to_s}}.to_json
-end
-
-get '/location' do
-  peter = GoogleGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
-  benji = GoogleGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
-  haml "%p Von Peter zu Benji sind es #{peter.distance_to(benji).round} Kilometer"
-end
-
-get '/weather' do
-  response = YahooWeather::Client.new.lookup_location("SZXX0033", 'c')
-  [response.title, response.condition.temp, response.condition.text].join("\n")
-end
-
-not_found do
-  "Nüüt gits!"
-end
-
-error do
-  "Pfui, bäh, en Fehler!"
+  # Only valid for http://localhost:4567/
+  Geokit::Geocoders::google = API_KEY
 end
 
 helpers do
@@ -115,4 +38,96 @@ helpers do
     text = request.path_info.gsub("/", "")
     text.empty? ? "index" : text
   end
+end
+
+
+#
+# Model
+#
+class Idea < ActiveRecord::Base
+  #  -----------------------------------------------------------------------
+  # | id | author | title | persons | duration | expenses | date | location |
+  #  -----------------------------------------------------------------------
+  def self.find_random_by_type(type, value)
+    results = find(:all, :conditions => "#{type} = #{value}")
+    # No results with specified criteria, resort to all.
+    results = find(:all) if results.empty?
+    results[rand(results.size)]
+  end
+end
+
+
+#========================================#
+#     ROUTING AND REQUEST HANDLING
+#========================================#
+
+#
+# Error handling
+#
+not_found { "Die angeforderte Seite wurde nicht gefunden." }
+error { "Ein Fehler ist aufgetreten" }
+
+
+#
+# Frontpage: Find ideas
+#
+get '/' do
+  erb :find
+end
+
+post '/find' do
+  @idea = Idea.find_random_by_type(params[:id], params[:value])
+  erb :result, :layout => false
+end
+
+
+#
+# Create ideas
+#
+get '/create' do
+  erb :create
+end
+
+post '/create' do
+  params[:duration] = params[:duration].to_i   # kann text sein wenn 0
+  params[:persons] = params[:persons].to_i + 1 # man selbst gehört auch dazu
+  Idea.create(params)
+  redirect '/create'
+end
+
+
+#
+# Administer ideas
+#
+get '/list' do
+  @ideas = Idea.find(:all)
+  erb :list
+end
+
+delete '/delete' do
+  idea = Idea.find(params[:id])
+  idea.destroy
+  redirect '/list'
+end
+
+post '/suggest_location.json' do
+  geo = Google::Geo.new API_KEY
+  addresses = geo.locate(params[:q] + " schweiz") # HACK: Eingrenzen auf die Schweiz
+  {"results" => addresses.map{|a| a.to_s}}.to_json
+end
+
+
+#========================================#
+#             EXPERIMENTAL
+#========================================#
+
+get '/location' do
+  peter = GoogleGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
+  benji = GoogleGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
+  haml "%p Von Peter zu Benji sind es #{peter.distance_to(benji).round} Kilometer"
+end
+
+get '/weather' do
+  response = YahooWeather::Client.new.lookup_location("SZXX0033", 'c')
+  [response.title, response.condition.temp, response.condition.text].join("\n")
 end
