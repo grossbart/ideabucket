@@ -1,5 +1,5 @@
 /**
- * Autocompleter jQuery plugin - autocompletion plugin for jQuery
+ * AutoCompleter jQuery plugin - autocompletion plugin for jQuery
  * Copyright (C) 2009 Emmanuel Surleau
  *
  * This program is free software; you can redistribute it and/or
@@ -152,7 +152,7 @@ jQuery.fn.autoCompleter = function(url, options) {
           this.confirmSuggestion();
         }
         break;
-      case 27: //	escape
+      case 27: // escape
         this.killPopup();
         break;
       case 8: // backspace
@@ -349,6 +349,9 @@ jQuery.fn.autoCompleter = function(url, options) {
   // Main action
   AutoCompleter.prototype.autoComplete = function() {
     var criterion = this.$input.val();
+
+    //Save the criterion for restoring it later
+    this.$input.data(this.settings.originalValueKey, criterion);
     // apply filter function, if any
     if (this.settings.inputFilterCallback)
       criterion = this.settings.inputFilterCallback.call(this, criterion);
@@ -362,7 +365,6 @@ jQuery.fn.autoCompleter = function(url, options) {
     var me = this;
 
     if (cache[criterion]) {
-      debug2("Retrieving "+criterion+" from cache.");
       var resultsHash = me.cache(criterion);
       me.handleQueryResults(resultsHash);
     }
