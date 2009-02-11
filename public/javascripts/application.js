@@ -5,7 +5,7 @@ function updateResults(name, value) {
     } else {
       html = "<p>Nichts gefunden...</p>";
     }
-    $("#results").html(html);
+    $("ul#results").prepend("<li>"+html+"</li>");
   });
 }
 
