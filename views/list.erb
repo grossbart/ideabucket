@@ -7,6 +7,7 @@
     <th>Expenses</th>
     <th>Date</th>
     <th>Location</th>
+    <th>Weather</th>
     <th>Edit</th>
   </tr>
   <% @ideas.each do |idea| %>
@@ -18,6 +19,7 @@
     <td><%= idea.expenses %></td>
     <td><%= idea.date %></td>
     <td><%= idea.location %></td>
+    <td><%= idea.weather %></td>
     <td>
       <form action="delete" method="post">
         <input name="_method" value="delete" type="hidden" />
