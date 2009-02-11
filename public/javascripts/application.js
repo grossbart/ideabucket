@@ -1,15 +1,3 @@
-/* Global variables
------------------------------------------*/
-var FILLER = "______";
-
-
-/* Helper functions
------------------------------------------*/
-function isNumeric(val) {
-  var RE = /^-{0,1}\d*\.{0,1}\d+$/;
-  return RE.test(val);
-}
-
 function updateResults(name, value) {
   $.post("/find", {"id": name, "value": value}, function(data, status) {
     if (status == 'success') {
@@ -30,6 +18,15 @@ $(document).ready(function() {
     if ($.cookie(id)) {
       $('option[value='+$.cookie(id)+']', this).attr("selected", true);
     }
+  });
+  
+  $("select.styled").each(function() {
+      $(this).styledselect({
+      onchange: function() {
+        $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
+        updateResults($(this).attr("name"), $(this).val());
+      }
+    });
   });
   
   $("body.index input[rel]").each(function() {
@@ -54,30 +51,19 @@ $(document).ready(function() {
     })
   });
 
-  
+  // Cookie handling (wird ausgelagert zu Sinatra)
   $('#clear_cookies').click(function() {
     $("[rel]").each(function() {
       $.cookie($(this).attr("rel"), null);
     });
   });
-	$('abbr').each(function(){
-		var dt = $(this).html();
-		var dd = $(this).attr('alt');
-		var note = '<dt>' + dt + '</dt><dd>' + dd + '</dd>';
-		$('dl.notes').append(note)
-	})
-});
-
-
-/* Style select elements
------------------------------------------*/
-jQuery(document).ready(function() {
-  $("select.styled").each(function() {
-    $(this).styledselect({
-      onchange: function() {
-        $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
-        updateResults($(this).attr("name"), $(this).val());
-      }
-    });
+  
+  // Footnotes
+  $('abbr').each(function(){
+    var dt = $(this).html();
+    var dd = $(this).attr('alt');
+    var note = '<dt>' + dt + '</dt><dd>' + dd + '</dd>';
+    $('dl.notes').append(note)
   });
 });
+
