@@ -1,0 +1,46 @@
+%p
+  Wir sind
+  %span
+    %form.madlib
+      %input{:name=>"persons", :type=>"text", :rel=>"persons"}
+  Personen und haben
+  %span
+    %form.madlib
+      %select.styled{:name=>"date", :rel=>"date"}
+        %option{:value=>"1"} sofort
+        %option{:value=>"2"} heute abend
+        %option{:value=>"4"} morgen
+        %option{:value=>"3"} am Wochenende
+  lust
+  %br
+  in der region 
+  %span.edit
+    Lenzburg
+    %abbr.note{:alt=>"autodetect, dropdown"} 1
+  etwas zu unternehmen
+  %br
+  das wetter ist
+  %span.edit
+    schneeig
+    %abbr.note{:alt=>"autodetect, dropdown"} 2
+  %br
+  wir möchten dafür nicht mehr als 
+  %span
+    %form.madlib
+      %input{:name=>"expenses", :type=>"text", :rel=>"expenses"}
+  franken pro person investieren
+  %br
+  und haben
+  %span
+    %form.madlib
+      %select.styled{:name=>"duration", :rel=>"duration"}
+        %option{:value=>"1"} 1 Stunde
+        %option{:value=>"2", :selected=>"true"} einige Stunden
+        %option{:value=>"1"} den ganzen Tag
+        %option{:value=>"1"} mehrere Tage
+  zeit.
+%p
+  %a#clear_cookies{:href=>""} (löschen)
+  %ul#results
+%p
+  %abbr.note{:alt=>"Ja, das machen wir! Heute nicht. Pfui, Bäh, NIE!"} 3

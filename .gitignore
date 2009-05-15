@@ -6,3 +6,4 @@
 /app/tmp/tests/*
 /app/webroot/img/Idea/*
 *.tmproj
+.sass-cache

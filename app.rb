@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 # run with `ruby app.rb`
 
 require 'rubygems'
+require 'compass' #must be loaded before sinatra
 require 'sinatra'
+require 'haml'    #must be loaded after sinatra
 require 'activerecord'
 require 'geokit'
 require 'yahoo-weather'
@@ -9,6 +12,12 @@ require 'yahoo-weather'
 # The gem is momentarily disabled as there are important bugfixes in our own copy
 # require 'google/geo'
 require 'lib/google/geo'
+
+
+# set sinatra's variables
+set :app_file, __FILE__
+set :root, File.dirname(__FILE__)
+set :views, "views"
 
 
 #
@@ -23,6 +32,14 @@ configure do
     :adapter => 'sqlite3',
     :dbfile =>  'db/app.sqlite3.db'
   )
+
+  # configure compass
+  Compass.configuration do |config|
+    config.project_path = File.dirname(__FILE__)
+    config.sass_dir = File.join(Sinatra::Application.views, 'stylesheets')
+    config.output_style = :compact
+  end
+  
   # Only valid for http://localhost:4567/
   Geokit::Geocoders::google = API_KEY
 end
@@ -65,14 +82,22 @@ end
 # Error handling
 #
 not_found { "Die angeforderte Seite wurde nicht gefunden." }
-error { "Ein Fehler ist aufgetreten" }
+#error { "Ein Fehler ist aufgetreten" }
+
+
+
+# at a minimum, the main sass file must reside within the ./views directory. here, we create a ./views/stylesheets directory where all of the sass files can safely reside.
+get '/stylesheets/:name.css' do
+  content_type 'text/css', :charset => 'utf-8'
+  sass :"stylesheets/#{params[:name]}", :sass => Compass.sass_engine_options
+end
 
 
 #
 # Frontpage: Find ideas
 #
 get '/' do
-  erb :find
+  haml :find
 end
 
 post '/find' do

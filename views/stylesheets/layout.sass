@@ -1,0 +1,92 @@
+@import base.sass
+
+html, body
+  padding: 0 0 2em
+  background: #fff
+
+#header
+  margin: 0 auto 20px
+  width= !body_width
+  h1 span.subheader
+    color: #aaa
+    font-size: 0.5em
+    text-transform: uppercase
+    
+#content
+  font-size: 1.333em
+  margin: 0 auto
+  width= !body_width
+
+ul#navigation
+  +horizontal-list(0.4em)
+
+
+input[type=text]
+  border-top: 2px solid #fff
+  border-right: 2px solid #fff
+  border-bottom: 2px solid #f07
+  border-left: 0px solid #fff
+  font-size: 1em
+  color: #f07
+  width: 2em
+  text-align: center
+  font-family: inherit
+  &:focus
+    border: 2px inset #bbb
+    color: #333
+  .longtext
+    width: 6em
+    text-align: left
+  .extralongtext
+    width: 20em
+    text-align: left
+
+span.select
+  position: absolute
+  color: #f07
+  border-bottom: 2px solid #f07
+  overflow: hidden
+
+#letterbody p
+  margin: 0
+  padding: 0
+
+.whisper input[type=text], .whisper span.select
+  border-bottom: 2px solid #ddd
+  color: #aaa
+
+.autocompleter
+  border: 4px solid #ccc
+  color: #666
+  background-color: #ccc
+  z-index: 1
+  position: absolute
+  font-size: 1em
+  .row
+    cursor: default
+    padding: 8px 20px
+    border-bottom: 1px solid #ccc
+  .selected
+    color: #f07
+    background-color: #fff
+
+ul#results
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 300px
+  list-style: none
+  overflow: hidden
+  margin: 0
+  padding: 0
+  li
+    display: block
+    float: left
+    width: 300px
+    height: 300px
+    background: #ccc
+    margin-right: 10px
+
+.clearfix
+  +clearfix
