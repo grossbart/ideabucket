@@ -15,15 +15,17 @@ function updateResults(name, value) {
 $(document).ready(function() {
   $("select[rel]").each(function() {
     var id = $(this).attr("rel");
+    /*
     if ($.cookie(id)) {
       $('option[value='+$.cookie(id)+']', this).attr("selected", true);
     }
+    */
   });
   
   $("select.styled").each(function() {
       $(this).styledselect({
       onchange: function() {
-        $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
+        //$.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
         updateResults($(this).attr("name"), $(this).val());
       }
     });
@@ -31,11 +33,13 @@ $(document).ready(function() {
   
   $("body.index input[rel]").each(function() {
     var id = $(this).attr("rel");
+    /*
     if ($.cookie(id)) {
       $(this).attr("value", $.cookie(id));
     }
+    */
     $(this).blur(function() {
-      $.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
+      //$.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
       updateResults($(this).attr("name"), $(this).val());
     });
   });
@@ -51,13 +55,6 @@ $(document).ready(function() {
     })
   });
 
-  // Cookie handling (wird ausgelagert zu Sinatra)
-  $('#clear_cookies').click(function() {
-    $("[rel]").each(function() {
-      $.cookie($(this).attr("rel"), null);
-    });
-  });
-  
   // Footnotes
   $('abbr').each(function(){
     var dt = $(this).html();

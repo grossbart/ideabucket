@@ -1,0 +1,29 @@
+%table
+  %tr
+    %th Author
+    %th Title
+    %th Persons
+    %th Duration
+    %th Expenses
+    %th Date
+    %th Edit
+  - @ideas.each do |idea|
+    %tr
+      %td 
+        = idea.author
+      %td
+        = idea.title
+      %td
+        = idea.persons
+      %td
+        = idea.duration
+      %td
+        = idea.expenses
+      %td
+        = idea.date
+      %td 
+        %form{:action=>"delete", :method=>"post"}
+          %input{:name=>"_method", :value=>"delete", :type=>"hidden"}
+          / FIXME: wie printe ich idea.id?
+          %input{:name=>"id", :value=>"<%= idea.id %>", :type=>"hidden"}
+          %input{:type=>"submit", :value=>"Delete"}

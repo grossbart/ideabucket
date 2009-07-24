@@ -1,0 +1,48 @@
+%form{:action=>"/create", :method=>"post"}
+  %p
+    Liebe Freunde
+  %div#letterbody
+    %p
+      Zusammen mit
+      %span
+        %input{:name=>"persons", :type=>"text", :rel=>"persons"}
+      Freunden habe ich
+      %span
+        %input.extralongtext{:name=>"title", :type=>"text", :rel=>"activity"}
+    %p.whisper
+      Das kann man 
+      %span
+        %select.styled{:name=>"date", :rel=>"date"}
+          %option{:value=>1} jederzeit
+          %option{:value=>1} vor allem abends
+          %option{:value=>1} vor allem an Wochenenden
+      %p.whisper
+        %span
+          %select.styled{:name=>"weather", :rel=>"weather"}
+            %option{:value=>0} bei jedem Wetter
+            %option{:value=>1} bei gutem Wetter
+            %option{:value=>2} bei schlechtem Wetter
+            %option{:value=>3} wenn's warm ist
+            %option{:value=>4} wenn's regnet
+            %option{:value=>5} wenn's Schnee hat
+      %p.whisper
+        Es
+        %span.add_expenses
+          hat pro Person
+        %span
+          %input{:name=>"expenses", :type=>"text", :rel=>"expenses"}
+        %span.add_expenses
+          Franken gekostet
+      %p.whisper
+        und hat
+        %span
+          %input{:name=>"duration", :type=>"text", :rel=>"duration"}
+          Stunden gedauert.
+  %p
+    Probierts doch auch mal!
+  %p
+    Liebe Grüsse,
+    %span
+      %input.longtext{:name=>"author", :type=>"text", :rel=>"sender"}
+  %p
+    %input{:type=>"submit", :value=>"Speichern"}

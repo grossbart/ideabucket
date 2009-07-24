@@ -6,56 +6,31 @@ require 'compass' #must be loaded before sinatra
 require 'sinatra'
 require 'haml'    #must be loaded after sinatra
 require 'activerecord'
-require 'geokit'
-require 'yahoo-weather'
-
-# The gem is momentarily disabled as there are important bugfixes in our own copy
-# require 'google/geo'
-require 'lib/google/geo'
-
+require 'helpers'
 
 # set sinatra's variables
 set :app_file, __FILE__
 set :root, File.dirname(__FILE__)
 set :views, "views"
 
-
 #
 # Configuration
 #
-API_KEY = 'ABQIAAAAKkxF5_xalx0zhXRdE2dXBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSjTiBzhT9UNDbF96KLnxX3-7jrGg' unless defined? API_KEY
-include Geokit::Geocoders
-Geokit::default_units = :kilometers
-
 configure do
+  # Active Record
   ActiveRecord::Base.establish_connection(
     :adapter => 'sqlite3',
-    :dbfile =>  'db/app.sqlite3.db'
+    :dbfile =>  'db/app.sqlite3'
   )
 
-  # configure compass
+  # Configure Compass
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir = File.join(Sinatra::Application.views, 'stylesheets')
     config.output_style = :compact
   end
-  
-  # Only valid for http://localhost:4567/
-  Geokit::Geocoders::google = API_KEY
 end
 
-helpers do
-  def l(title, path = nil, attributes = {})
-    attributes[:href]  = path ||= title.downcase
-    attributes[:class] = "active" if request.path_info =~ /#{path}$/i
-    "<a #{attributes.map{|a,v| "#{a}='#{v}'"}.join(" ")}>#{title}</a>"
-  end
-  
-  def body_class
-    text = request.path_info.gsub("/", "")
-    text.empty? ? "index" : text
-  end
-end
 
 
 #
@@ -82,11 +57,12 @@ end
 # Error handling
 #
 not_found { "Die angeforderte Seite wurde nicht gefunden." }
-#error { "Ein Fehler ist aufgetreten" }
+error { "Ein Fehler ist aufgetreten" }
 
 
-
-# at a minimum, the main sass file must reside within the ./views directory. here, we create a ./views/stylesheets directory where all of the sass files can safely reside.
+#
+# Sass
+#
 get '/stylesheets/:name.css' do
   content_type 'text/css', :charset => 'utf-8'
   sass :"stylesheets/#{params[:name]}", :sass => Compass.sass_engine_options
@@ -102,7 +78,7 @@ end
 
 post '/find' do
   @idea = Idea.find_random_by_type(params[:id], params[:value])
-  erb :result, :layout => false
+  haml :result, :layout => false
 end
 
 
@@ -110,7 +86,7 @@ end
 # Create ideas
 #
 get '/create' do
-  erb :create
+  haml :create
 end
 
 post '/create' do
@@ -126,33 +102,11 @@ end
 #
 get '/list' do
   @ideas = Idea.find(:all)
-  erb :list
+  haml :list
 end
 
 delete '/delete' do
   idea = Idea.find(params[:id])
   idea.destroy
   redirect '/list'
-end
-
-post '/suggest_location.json' do
-  geo = Google::Geo.new API_KEY
-  addresses = geo.locate(params[:q] + " schweiz") # HACK: Eingrenzen auf die Schweiz
-  {"results" => addresses.map{|a| a.to_s}}.to_json
-end
-
-
-#========================================#
-#             EXPERIMENTAL
-#========================================#
-
-get '/location' do
-  peter = GoogleGeocoder.geocode 'Zentralstrasse 118 Wettingen Schweiz'
-  benji = GoogleGeocoder.geocode 'Rathausgässli 31 Lenzburg Schweiz'
-  haml "%p Von Peter zu Benji sind es #{peter.distance_to(benji).round} Kilometer"
-end
-
-get '/weather' do
-  response = YahooWeather::Client.new.lookup_location("SZXX0033", 'c')
-  [response.title, response.condition.temp, response.condition.text].join("\n")
 end
