@@ -24,6 +24,5 @@
       %td 
         %form{:action=>"delete", :method=>"post"}
           %input{:name=>"_method", :value=>"delete", :type=>"hidden"}
-          / FIXME: wie printe ich idea.id?
-          %input{:name=>"id", :value=>"<%= idea.id %>", :type=>"hidden"}
+          %input{:name=>"id", :value=>"#{idea.id}", :type=>"hidden"}
           %input{:type=>"submit", :value=>"Delete"}
