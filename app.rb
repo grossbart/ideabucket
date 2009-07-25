@@ -29,7 +29,7 @@ configure do
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir = File.join(Sinatra::Application.views, 'stylesheets')
-    config.output_style = :compressed
+    config.output_style = :compact
   end
 end
 
