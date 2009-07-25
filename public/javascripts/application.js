@@ -5,7 +5,7 @@ function updateResults(name, value) {
     } else {
       html = "<p>Nichts gefunden...</p>";
     }
-    $("ul#results").prepend("<li>"+html+"</li>");
+    $("#results ul").prepend("<li>"+html+"</li>");
   });
 }
 
@@ -13,33 +13,19 @@ function updateResults(name, value) {
 /* Run when document is ready
 -----------------------------------------*/
 $(document).ready(function() {
-  $("select[rel]").each(function() {
-    var id = $(this).attr("rel");
-    /*
-    if ($.cookie(id)) {
-      $('option[value='+$.cookie(id)+']', this).attr("selected", true);
-    }
-    */
-  });
   
-  $("select.styled").each(function() {
-      $(this).styledselect({
-      onchange: function() {
-        //$.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
-        updateResults($(this).attr("name"), $(this).val());
-      }
-    });
+  $("select.styled").styledselect(function() {
+    updateResults($(this).attr("name"), $(this).val());
   });
+
+  // $("select.styled").each(function() {
+  //   $(this).styledselect(function() {
+  //     updateResults($(this).attr("name"), $(this).val());
+  //   });
+  // });
   
-  $("body.index input[rel]").each(function() {
-    var id = $(this).attr("rel");
-    /*
-    if ($.cookie(id)) {
-      $(this).attr("value", $.cookie(id));
-    }
-    */
+  $("body.index input").each(function() {
     $(this).blur(function() {
-      //$.cookie($(this).attr("rel"), $(this).val(), { expires: 14 });
       updateResults($(this).attr("name"), $(this).val());
     });
   });
@@ -53,14 +39,6 @@ $(document).ready(function() {
         $(this).closest("p").addClass("whisper");
       }
     })
-  });
-
-  // Footnotes
-  $('abbr').each(function(){
-    var dt = $(this).html();
-    var dd = $(this).attr('alt');
-    var note = '<dt>' + dt + '</dt><dd>' + dd + '</dd>';
-    $('dl.notes').append(note)
   });
 });
 

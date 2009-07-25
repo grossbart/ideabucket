@@ -6,7 +6,10 @@ require 'compass' #must be loaded before sinatra
 require 'sinatra'
 require 'haml'    #must be loaded after sinatra
 require 'activerecord'
-require 'helpers'
+require 'lib/models'
+require 'lib/helpers'
+
+ENV['APP_ENV'] ||= 'development'
 
 # set sinatra's variables
 set :app_file, __FILE__
@@ -18,33 +21,15 @@ set :views, "views"
 #
 configure do
   # Active Record
-  ActiveRecord::Base.establish_connection(
-    :adapter => 'sqlite3',
-    :dbfile =>  'db/app.sqlite3'
-  )
+  config = YAML::load(File.open(File.join(File.dirname(__FILE__), 'db', 'database.yml')))
+  ActiveRecord::Base.configurations = config
+  ActiveRecord::Base.establish_connection(ENV['APP_ENV'])
 
   # Configure Compass
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir = File.join(Sinatra::Application.views, 'stylesheets')
-    config.output_style = :compact
-  end
-end
-
-
-
-#
-# Model
-#
-class Idea < ActiveRecord::Base
-  #  -----------------------------------------------------------------------
-  # | id | author | title | persons | duration | expenses | date | location |
-  #  -----------------------------------------------------------------------
-  def self.find_random_by_type(type, value)
-    results = find(:all, :conditions => "#{type} = #{value}")
-    # No results with specified criteria, resort to all.
-    results = find(:all) if results.empty?
-    results[rand(results.size)]
+    config.output_style = :compressed
   end
 end
 
@@ -91,7 +76,7 @@ end
 
 post '/create' do
   params[:duration] = params[:duration].to_i   # kann text sein wenn 0
-  params[:persons] = params[:persons].to_i + 1 # man selbst gehört auch dazu
+  params[:participants] = params[:participants].to_i + 1 # man selbst gehört auch dazu
   Idea.create(params)
   redirect '/create'
 end

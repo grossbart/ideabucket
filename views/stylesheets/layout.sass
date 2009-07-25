@@ -41,8 +41,10 @@ input[type=text]
     width: 20em
     text-align: left
 
+select.styled:hover
+  cursor: pointer
+
 span.select
-  position: absolute
   color: #f07
   border-bottom: 2px solid #f07
   overflow: hidden
@@ -70,18 +72,19 @@ span.select
     color: #f07
     background-color: #fff
 
-ul#results
-  width: 100%
-  list-style: none
-  overflow: hidden
-  margin: 0
-  padding: 0
-  li
-    display: block
+#results
+  ul
     width: 100%
-    height: 30px
-    margin-right: 10px
-    border-bottom: 1px solid #000
+    list-style: none
+    overflow: hidden
+    margin: 0
+    padding: 0
+    li
+      display: block
+      width: 100%
+      height: 30px
+      margin-right: 10px
+      border-bottom: 1px solid #000
 
 .clearfix
   +clearfix

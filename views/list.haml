@@ -2,10 +2,10 @@
   %tr
     %th Author
     %th Title
-    %th Persons
+    %th Participants
     %th Duration
     %th Expenses
-    %th Date
+    %th Time
     %th Edit
   - @ideas.each do |idea|
     %tr
@@ -14,13 +14,13 @@
       %td
         = idea.title
       %td
-        = idea.persons
+        = idea.participants
       %td
         = idea.duration
       %td
         = idea.expenses
       %td
-        = idea.date
+        = idea.time
       %td 
         %form{:action=>"delete", :method=>"post"}
           %input{:name=>"_method", :value=>"delete", :type=>"hidden"}

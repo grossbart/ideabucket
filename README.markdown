@@ -3,6 +3,5 @@ Dependencies
 
 * sinatra gem
 * activerecord
-* geokit
-* yahoo-weather
-* google-geo
+* sass 2.2.0
+* compass

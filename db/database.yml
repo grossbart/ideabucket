@@ -1,0 +1,4 @@
+development:
+  adapter:  sqlite3
+  dbfile:   db/development.sqlite3
+  encoding: utf8
