@@ -62,8 +62,7 @@ get '/' do
 end
 
 post '/find' do
-  @idea = Idea.find_random_by_type(params[:id], params[:value])
-  haml :result, :layout => false
+  (@ideas = Idea.find_matches(params)) ? @ideas.to_json : {}
 end
 
 

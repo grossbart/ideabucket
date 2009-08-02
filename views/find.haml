@@ -1,4 +1,4 @@
-%form.madlib{:action=>"find"}
+%form#questionnaire{:action=>"find", :method=>"post"}
   %p
     Wir sind
     %input{:name=>"participants", :type=>"text"}
@@ -11,8 +11,12 @@
     lust etwas zu unternehmen
     %br
     das wetter ist
-    %span.edit
-      schneeig
+    %select.styled{:name=>"weather", :rel=>"weather"}
+      %option{:value=>1} gut
+      %option{:value=>2} schlecht
+      %option{:value=>3} warm
+      %option{:value=>4} regnerisch
+      %option{:value=>5} verschneit
     %br
     wir möchten dafür nicht mehr als 
     %input{:name=>"expenses", :type=>"text"}
@@ -20,10 +24,12 @@
     %br
     und haben
     %select.styled{:name=>"duration"}
-      %option{:value=>"1"} 1 Stunde
-      %option{:value=>"2", :selected=>"selected"} einige Stunden
-      %option{:value=>"1"} den ganzen Tag
-      %option{:value=>"1"} mehrere Tage
+      %option{:value=>1} 1 Stunde
+      %option{:value=>2, :selected=>"selected"} einige Stunden
+      %option{:value=>3} den ganzen Tag
+      %option{:value=>4} mehrere Tage
     zeit.
+  %p
+    %input{:type=>"submit", :value=>"Ideen vorschlagen"}
   #results
     %ul

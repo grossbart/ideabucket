@@ -1,35 +1,8 @@
-function updateResults(name, value) {
-  $.post("/find", {"id": name, "value": value}, function(data, status) {
-    if (status == 'success') {
-      html = data;
-    } else {
-      html = "<p>Nichts gefunden...</p>";
-    }
-    $("#results ul").prepend("<li>"+html+"</li>");
-  });
-}
-
-
 /* Run when document is ready
 -----------------------------------------*/
 $(document).ready(function() {
-  
-  $("select.styled").styledselect(function() {
-    updateResults($(this).attr("name"), $(this).val());
-  });
-
-  // $("select.styled").each(function() {
-  //   $(this).styledselect(function() {
-  //     updateResults($(this).attr("name"), $(this).val());
-  //   });
-  // });
-  
-  $("body.index input").each(function() {
-    $(this).blur(function() {
-      updateResults($(this).attr("name"), $(this).val());
-    });
-  });
-
+  // Styling
+  $("select.styled").styledselect();
   $(".whisper input").each(function() {
     $(this).focus(function() {
       $(this).closest("p").removeClass("whisper");
@@ -39,6 +12,23 @@ $(document).ready(function() {
         $(this).closest("p").addClass("whisper");
       }
     })
+  });
+  
+  // Form Handling
+  $("#questionnaire").submit(function() {
+    $.post($(this).attr("action"), $(this).serialize(), function(data, status) {
+      var t = "<li>{title}</li>";
+      var answer = "";
+      if (data.length > 0) {
+        answer = $.map(data, function(idea) {
+          return $.nano(t, idea);
+        }).join("");
+      } else {
+        answer = "<li>Nichts passendes gefunden.</li>"
+      }
+      $("#results ul").empty().append(answer);
+    }, "json");
+    return false;
   });
 });
 
